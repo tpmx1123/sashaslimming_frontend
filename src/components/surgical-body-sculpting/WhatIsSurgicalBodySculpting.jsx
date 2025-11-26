@@ -134,7 +134,7 @@ const WhatIsSurgicalBodySculpting = () => {
               transition={{ duration: 0.2 }}
             >
               {/* Image */}
-              <div className="w-full bg-purple-50 flex items-center justify-center p-4 md:p-6">
+              <div className="w-full bg-purple-50 flex items-center justify-center ">
                 <img
                   src={card.image}
                   alt={card.title}
