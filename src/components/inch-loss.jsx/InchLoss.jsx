@@ -3,7 +3,7 @@ import BookModel from '../BookModel'
 import WhatIsInchLoss from './what-is-inchlos'
 import Benefits from './benefits'
 import WhoFor from './whoFor'
-import BeforeAfter from './beforeAfter'
+import BeforeAfter from './beforeafter'
 import Faqsection from './faqsection'
 import { motion } from 'framer-motion'
 const InchLoss = () => {
