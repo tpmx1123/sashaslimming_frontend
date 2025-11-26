@@ -138,7 +138,7 @@ const WhatIsSurgicalBodySculpting = () => {
                 <img
                   src={card.image}
                   alt={card.title}
-                  className="w-full h-auto max-h-[180px] md:max-h-[200px] object-contain"
+                  className="w-full h-auto max-h-[180px] md:max-h-[200px] object-cover"
                 />
               </div>
 

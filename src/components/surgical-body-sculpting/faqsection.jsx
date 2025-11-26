@@ -80,35 +80,17 @@ const FlapAskedQuestions = () => {
         Frequently Asked Questions
       </h1>
 
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "flex-start",
-          gap: "40px",
-          flexWrap: "wrap",
-        }}
-      >
-        <motion.img
-          src="https://res.cloudinary.com/di4caiech/image/upload/v1764045875/faq_kpkxcw.png"
-          alt="FAQ Illustration"
-          initial={{ opacity: 0, scale: 0.92 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.4 }}
-          whileHover={{ scale: 1.04 }}
-          style={{
-            width: "350px",
-            height: "auto",
-            maxWidth: "350px",
-            minWidth: "350px",
-            marginTop: "20px",
-            cursor: "pointer",
-            transition: "transform 0.22s ease-out",
-            flexShrink: 0,
-            objectFit: "contain",
-          }}
-        />
+      <div className="flex flex-col lg:flex-row items-center lg:items-start justify-center gap-6 md:gap-8 lg:gap-10">
+          <motion.img
+            src="https://res.cloudinary.com/di4caiech/image/upload/v1764045875/faq_kpkxcw.png"
+            alt="FAQ Illustration"
+            initial={{ opacity: 0, scale: 0.92 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.4 }}
+            whileHover={{ scale: 1.04 }}
+            className="w-full max-w-[200px] sm:max-w-[250px] md:max-w-[300px] lg:max-w-[350px] cursor-default"
+          />
 
         <motion.div 
           style={{ display: "flex", flexDirection: "column", gap: "10px", flex: 1 }}
