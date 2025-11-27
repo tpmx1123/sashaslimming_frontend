@@ -164,8 +164,8 @@ const FAQ = () => {
               ))}
             </div>
           </motion.div>
+          </div>
         </div>
-      </div>
     </motion.section>
   );
 };

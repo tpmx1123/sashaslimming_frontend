@@ -16,7 +16,7 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-24">
           {/* Logo and Brand Info - Left Side */}
-          <div className="flex items-center space-x-4 flex-shrink-0">
+          <div className="flex items-center space-x-16 flex-shrink-0">
             <Link to="/">
               <img 
                 src={logo} 
@@ -25,8 +25,8 @@ const Navbar = () => {
               />
             </Link>
              <div className="hidden lg:flex items-center space-x-6">
-            <Link to="/#about" className="text-sasha-purple-deeper font-semibold uppercase text-[15px] hover:text-sasha-purple-dark transition-colors">
-              ABOUT US
+            <Link to="/" className="text-sasha-purple-deeper font-semibold uppercase text-[15px] hover:text-sasha-purple-dark transition-colors">
+              Home
             </Link>
             
             <div className="relative group">
@@ -47,7 +47,7 @@ const Navbar = () => {
                   onMouseLeave={() => setConcernsOpen(false)}
                 >
                   <div className="bg-white shadow-lg rounded-md py-2 mt-0">
-                    <Link to="/advanced-slimming" className="block px-4 py-2 text-sm text-gray-700 hover:bg-sasha-purple-light">Advanced Slimming</Link>
+                    <Link to="/advanced-slimming" className="block px-4 py-2 text-sm text-sasha-purple-deeper hover:bg-sasha-purple-light">Advanced Slimming</Link>
                   </div>
                 </div>
               )}
@@ -71,24 +71,21 @@ const Navbar = () => {
                   onMouseLeave={() => setServicesOpen(false)}
                 >
                   <div className="bg-white shadow-lg rounded-md py-2 mt-0">
-                    <Link to="/skin-tightening" className="block px-4 py-2 text-sm text-gray-700 hover:bg-sasha-purple-light">Skin Tightening</Link>
-                    <Link to="/inch-loss" className="block px-4 py-2 text-sm text-gray-700 hover:bg-sasha-purple-light">Inch Loss</Link>
-                    <Link to="/fat-reduction" className="block px-4 py-2 text-sm text-gray-700 hover:bg-sasha-purple-light">Fat Reduction</Link>
-                    <Link to="/surgical-body-sculpting" className="block px-4 py-2 text-sm text-gray-700 hover:bg-sasha-purple-light">Surgical Body Sculpting</Link>
-                    <Link to="/muscle-building-toning" className="block px-4 py-2 text-sm text-gray-700 hover:bg-sasha-purple-light">Muscle Building & Toning</Link>
+                    <Link to="/skin-tightening" className="block px-4 py-2 text-sm text-sasha-purple-deeper hover:bg-sasha-purple-light">Skin Tightening</Link>
+                    <Link to="/inch-loss" className="block px-4 py-2 text-sm text-sasha-purple-deeper hover:bg-sasha-purple-light">Inch Loss</Link>
+                    <Link to="/fat-reduction" className="block px-4 py-2 text-sm text-sasha-purple-deeper hover:bg-sasha-purple-light">Fat Reduction</Link>
+                    <Link to="/surgical-body-sculpting" className="block px-4 py-2 text-sm text-sasha-purple-deeper hover:bg-sasha-purple-light">Surgical Body Sculpting</Link>
+                    <Link to="/muscle-building-toning" className="block px-4 py-2 text-sm text-sasha-purple-deeper hover:bg-sasha-purple-light">Muscle Building & Toning</Link>
                   </div>
                 </div>
               )}
             </div>
 
-            <Link to="/#before-after" className="text-sasha-purple-deeper font-semibold uppercase text-[15px] hover:text-sasha-purple-dark transition-colors">
-              BEFORE & AFTER
+            <Link to="/blog" className="text-sasha-purple-deeper font-semibold uppercase text-[15px] hover:text-sasha-purple-dark transition-colors">
+              Blog
             </Link>
-            <Link to="/#celebrities" className="text-sasha-purple-deeper font-semibold uppercase text-[15px] hover:text-sasha-purple-dark transition-colors">
-              CELEBRITIES
-            </Link>
-            <Link to="/#devices" className="text-sasha-purple-deeper font-semibold uppercase text-[15px] hover:text-sasha-purple-dark transition-colors">
-              DEVICES
+            <Link to="/contact-us" className="text-sasha-purple-deeper font-semibold uppercase text-[15px] hover:text-sasha-purple-dark transition-colors">
+              Contact Us
             </Link>
           </div>
             
@@ -112,12 +109,7 @@ const Navbar = () => {
                 </svg>
                 <a href="tel:+919234569999" className="text-sasha-purple-deeper font-semibold text-sm hover:text-sasha-purple-dark transition-colors">9234569999</a>
               </div>
-              <div className="flex items-center space-x-2">
-                <svg className="w-4 h-4 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
-                  <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
-                </svg>
-                <a href="tel:+919479659999" className="text-sasha-purple-deeper font-semibold text-sm hover:text-sasha-purple-dark transition-colors">9479659999</a>
-              </div>
+              
             </div>
 
             {/* Mobile Menu Button */}
@@ -143,11 +135,11 @@ const Navbar = () => {
           <div className="lg:hidden border-t border-sasha-purple-light py-4">
             <div className="flex flex-col space-y-4">
               <Link 
-                to="/#about" 
+                to="/" 
                 className="text-sasha-purple-deeper font-semibold uppercase text-[10px] hover:text-sasha-purple-dark transition-colors px-4"
                 onClick={() => setMobileMenuOpen(false)}
               >
-                ABOUT US
+                Home
               </Link>
 
               <div className="px-4">
@@ -168,7 +160,7 @@ const Navbar = () => {
                   <div className="mt-2 pl-4 space-y-2">
                     <Link 
                       to="/advanced-slimming" 
-                      className="block text-sm text-gray-700 hover:text-sasha-purple-dark"
+                      className="block text-sm text-sasha-purple-deeper hover:text-sasha-purple-dark"
                       onClick={() => setMobileMenuOpen(false)}
                     >
                       Advanced Slimming
@@ -197,35 +189,35 @@ const Navbar = () => {
                   <div className="mt-2 pl-4 space-y-2">
                     <a 
                       href="/skin-tightening" 
-                      className="block text-sm text-gray-700 hover:text-sasha-purple-dark"
+                      className="block text-sm text-sasha-purple-deeper hover:text-sasha-purple-dark"
                       onClick={() => setMobileMenuOpen(false)}
                     >
                      Skin Tightening
                     </a>
                     <a 
                       href="/inch-loss" 
-                      className="block text-sm text-gray-700 hover:text-sasha-purple-dark"
+                      className="block text-sm text-sasha-purple-deeper hover:text-sasha-purple-dark"
                       onClick={() => setMobileMenuOpen(false)}
                     >
                       Inch Loss
                     </a>
                     <a 
                       href="/fat-reduction" 
-                      className="block text-sm text-gray-700 hover:text-sasha-purple-dark"
+                      className="block text-sm text-sasha-purple-deeper hover:text-sasha-purple-dark"
                       onClick={() => setMobileMenuOpen(false)}
                     >
                       Fat Reduction 
                     </a>
                     <a 
                       href="/surgical-body-sculpting" 
-                      className="block text-sm text-gray-700 hover:text-sasha-purple-dark"
+                      className="block text-sm text-sasha-purple-deeper hover:text-sasha-purple-dark"
                       onClick={() => setMobileMenuOpen(false)}
                     >
                       Surgical Body Sculpting
                     </a>
                     <a 
                       href="/muscle-building-toning" 
-                      className="block text-sm text-gray-700 hover:text-sasha-purple-dark"
+                      className="block text-sm text-sasha-purple-deeper hover:text-sasha-purple-dark"
                       onClick={() => setMobileMenuOpen(false)}
                     >
                       Muscle Building & Toning
@@ -235,25 +227,18 @@ const Navbar = () => {
               </div>
 
               <Link 
-                to="/#before-after" 
+                to="/blog" 
                 className="text-sasha-purple-deeper font-semibold uppercase text-[10px] hover:text-sasha-purple-dark transition-colors px-4"
                 onClick={() => setMobileMenuOpen(false)}
               >
-                BEFORE & AFTER
+                Blog
               </Link>
               <Link 
-                to="/#celebrities" 
+                to="/contact-us" 
                 className="text-sasha-purple-deeper font-semibold uppercase text-[10px] hover:text-sasha-purple-dark transition-colors px-4"
                 onClick={() => setMobileMenuOpen(false)}
               >
-                CELEBRITIES
-              </Link>
-              <Link 
-                to="/#devices" 
-                className="text-sasha-purple-deeper font-semibold uppercase text-[10px] hover:text-sasha-purple-dark transition-colors px-4"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                DEVICES
+                Contact Us
               </Link>
 
               {/* Mobile Book Appointment Button */}
@@ -276,12 +261,6 @@ const Navbar = () => {
                     <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
                   </svg>
                   <a href="tel:+919234569999" className="text-sasha-purple-deeper font-semibold text-sm hover:text-sasha-purple-dark transition-colors">9234569999</a>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <svg className="w-4 h-4 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
-                  </svg>
-                  <a href="tel:+919479659999" className="text-sasha-purple-deeper font-semibold text-sm hover:text-sasha-purple-dark transition-colors">9479659999</a>
                 </div>
               </div>
             </div>

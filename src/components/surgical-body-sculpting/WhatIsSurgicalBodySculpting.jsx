@@ -141,7 +141,6 @@ const WhatIsSurgicalBodySculpting = () => {
                   className="w-full h-auto max-h-[180px] md:max-h-[200px] object-cover"
                 />
               </div>
-
               {/* Content */}
               <div className="p-4 md:p-5">
                 <h3 className="text-base md:text-lg lg:text-xl font-bold text-[#61338A] mb-2 md:mb-3 font-poppins">
@@ -154,7 +153,6 @@ const WhatIsSurgicalBodySculpting = () => {
             </motion.div>
           ))}
         </motion.div>
-
       </div>
     </div>
   );

@@ -19,7 +19,7 @@ const Core = () => {
   }
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
+    hidden: { opacity: 0, y: 10 },
     visible: {
       opacity: 1,
       y: 0,
@@ -80,7 +80,7 @@ const Core = () => {
       className="w-full bg-white py-10 lg:py-2"
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, amount: 0.2 }}
+      viewport={{ once: false, amount: 0.1 }}
       variants={containerVariants}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
