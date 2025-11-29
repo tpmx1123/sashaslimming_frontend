@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-const Blog = () => {
+const blog = () => {
   const [activeCategory, setActiveCategory] = useState('All Articles');
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -271,4 +271,4 @@ const Blog = () => {
   );
 };
 
-export default Blog;
+export default blog;

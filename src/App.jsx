@@ -30,7 +30,8 @@ function AppContent() {
     '/fat-reduction',
     '/surgical-body-sculpting',
     '/muscle-building-toning',
-    '/contact-us'   
+    '/contact-us',
+    '/blog'   
   ]
 
   const isErrorPage = !validRoutes.includes(location.pathname)

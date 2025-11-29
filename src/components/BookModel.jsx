@@ -1,47 +1,48 @@
 import React, { useState, useEffect } from 'react'
 import toast, { Toaster } from 'react-hot-toast'
 
-// Custom toast styles
-const toastStyle = {
-  style: {
-    border: '1px solid #713200',
-    padding: '16px',
-    color: '#713200',
-    zIndex: 9999,
-    marginTop: '70px' // Add margin to avoid navbar overlap
-  },
-  duration: 4000,
-  position: 'top-center',
-  // Custom success and error styles
-  success: {
+// Toast configuration
+const showSuccessToast = (message) => {
+  toast.success(message, {
     style: {
       background: '#4BB543',
       color: 'white',
       border: 'none',
       padding: '16px',
-      zIndex: 9999,
-      marginTop: '70px'
+      borderRadius: '8px',
+      boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)',
+      marginTop: '70px',
+      zIndex: 9999
     },
+    duration: 4000,
+    position: 'top-right',
     iconTheme: {
       primary: 'white',
       secondary: '#4BB543'
     }
-  },
-  error: {
+  });
+};
+
+const showErrorToast = (message) => {
+  toast.error(message, {
     style: {
       background: '#FF3333',
       color: 'white',
       border: 'none',
       padding: '16px',
-      zIndex: 9999,
-      marginTop: '70px'
+      borderRadius: '8px',
+      boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)',
+      marginTop: '70px',
+      zIndex: 9999
     },
+    duration: 4000,
+    position: 'top-right',
     iconTheme: {
       primary: 'white',
       secondary: '#FF3333'
     }
-  }
-}
+  });
+};
 
 const BookModel = ({ isOpen, onClose }) => {
   const [formData, setFormData] = useState({
@@ -163,11 +164,8 @@ const BookModel = ({ isOpen, onClose }) => {
     try {
       await new Promise((res) => setTimeout(res, 1000))
 
-      // Show success toast first
-      await toast.success('Your appointment request has been submitted!', {
-        ...toastStyle.success,
-        duration: 2000 // Show for 2 seconds before closing
-      });
+      // Show success toast
+      showSuccessToast('Your appointment request has been submitted!');
       
       // Clear form data after toast is shown
       setFormData({
@@ -182,10 +180,10 @@ const BookModel = ({ isOpen, onClose }) => {
       setCharCount(0);
       
       // Close the form after a short delay to ensure toast is visible
-      setTimeout(() => onClose(), 500);
+      setTimeout(() => onClose(), 2000);
     } catch (err) {
       console.error('Form submission error:', err)
-      toast.error('Error submitting form. Please try again.', toastStyle.error)
+      showErrorToast('Error submitting form. Please try again.');
     } finally {
       setIsSubmitting(false)
     }
@@ -202,15 +200,41 @@ const BookModel = ({ isOpen, onClose }) => {
   return (
     <>
       <Toaster 
-        position="top-center"
+        position="top-right"
         toastOptions={{
-          duration: 2000,
-          style: {
-            marginTop: '70px',
-            zIndex: 9999
+          duration: 4000,
+          success: {
+            style: {
+              background: '#4BB543',
+              color: 'white',
+              border: 'none',
+              padding: '16px',
+              zIndex: 9999,
+              marginTop: '70px',
+              borderRadius: '8px',
+              boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)'
+            },
+            iconTheme: {
+              primary: 'white',
+              secondary: '#4BB543'
+            }
           },
-          success: toastStyle.success,
-          error: toastStyle.error
+          error: {
+            style: {
+              background: '#FF3333',
+              color: 'white',
+              border: 'none',
+              padding: '16px',
+              zIndex: 9999,
+              marginTop: '70px',
+              borderRadius: '8px',
+              boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)'
+            },
+            iconTheme: {
+              primary: 'white',
+              secondary: '#FF3333'
+            }
+          }
         }}
       />
       <div className="fixed inset-0 z-50 flex items-center justify-center p-0 sm:p-4 bg-black bg-opacity-50" onClick={handleClose}>
@@ -315,13 +339,13 @@ const BookModel = ({ isOpen, onClose }) => {
 
             {/* SERVICE */}
             <div>
-              <label className="block text-sm font-Be-Vietnam text-[#392D44] mb-2">Service Interested In</label>
+              <label className="block text-sm font-Be-Vietnam text-[#392D44] mb-2">Service Interested In *</label>
               <select
                 name="service"
                 value={formData.service}
                 onChange={handleChange}
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg"
-              >
+              required>
                 <option value="">Select a service</option>
                 <option value="consultation">Consultation</option>
                 <option value="fat-reduction">Fat Reduction</option>
