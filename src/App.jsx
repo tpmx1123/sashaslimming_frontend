@@ -17,7 +17,7 @@ import SurgicalBodySculpting from './components/surgical-body-sculpting/surgical
 import MuscleBuildingToning from './components/muscle-building&toning/MuscleHero'
 import ErrorPage from './components/ErrorPage'
 import ContactUs from './components/ContactUs'   
-import Blog from './components/blog'
+import Blog from './components/Blog'
 
 function AppContent() {
   const location = useLocation()
