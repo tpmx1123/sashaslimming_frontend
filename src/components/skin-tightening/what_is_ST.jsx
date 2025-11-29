@@ -143,16 +143,7 @@ const WhatIsST = () => {
                     {therapy.description}
                   </p>
 
-                  {/* Read More Button */}
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleNavigation(therapy.path);
-                    }}
-                    className="bg-[#61338A] hover:bg-[#4A2A6B] text-white font-semibold px-6 py-2 rounded-lg transition-colors duration-300 font-poppins"
-                  >
-                    Read more
-                  </button>
+                 
                 </div>
               </motion.div>
             ))}

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
+import toast, { Toaster } from 'react-hot-toast'
 
 const bannerImage =
   'https://res.cloudinary.com/di4caiech/image/upload/v1764238157/contact_slim_nj7mks.jpg'
@@ -15,6 +16,13 @@ const ContactUs = () => {
 
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [showSuccess, setShowSuccess] = useState(false)
+  const [errors, setErrors] = useState({
+    email: '',
+    phone: '',
+    message: ''
+  })
+  const [charCount, setCharCount] = useState(0)
+  const MAX_WORDS = 500
 
   // Hide success message after 5 seconds
   useEffect(() => {
@@ -80,16 +88,78 @@ const ContactUs = () => {
     },
   }
 
+  const validateEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    if (!email) return 'Email is required'
+    if (!emailRegex.test(email)) return 'Please enter a valid email address'
+    return ''
+  }
+
+  const validatePhone = (phone) => {
+    const digits = phone.replace(/\D/g, '')
+    if (!phone) return 'Phone number is required'
+    if (digits.length < 10) return 'Number is too short'
+    if (digits.length > 15) return 'Number is too long'
+    return ''
+  }
+
+  const validateMessage = (message) => {
+    const words = message.trim().split(/\s+/).filter(word => word.length > 0)
+    if (words.length === 0) return 'Message is required'
+    if (words.length > MAX_WORDS) return `Message cannot exceed ${MAX_WORDS} words`
+    return ''
+  }
+
   const handleChange = (e) => {
     const { name, value } = e.target
-    setFormData((prev) => ({
+    
+    // Update form data
+    setFormData(prev => ({
       ...prev,
-      [name]: value,
+      [name]: value
     }))
+    
+    // Update word count for message field
+    if (name === 'message') {
+      const words = value.trim().split(/\s+/).filter(word => word.length > 0)
+      setCharCount(words.length)
+    }
+    
+    // Clear error when user types
+    if (errors[name]) {
+      setErrors(prev => ({
+        ...prev,
+        [name]: ''
+      }))
+    }
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    
+    // Validate all fields
+    const emailError = validateEmail(formData.email)
+    const phoneError = validatePhone(formData.phone)
+    const messageError = validateMessage(formData.message)
+    
+    setErrors({
+      email: emailError,
+      phone: phoneError,
+      message: messageError
+    })
+    
+    // Don't submit if there are validation errors
+    if (emailError || phoneError || messageError) {
+      toast.error('Please fix the errors in the form', {
+        style: {
+          background: '#FF3333',
+          color: 'white',
+          marginTop: '70px'
+        }
+      })
+      return
+    }
+    
     setIsSubmitting(true)
 
     try {
@@ -113,6 +183,15 @@ const ContactUs = () => {
       })
 
       if (response.ok) {
+        // Show success toast
+        toast.success('Your message has been sent successfully!', {
+          style: {
+            background: '#4BB543',
+            color: 'white',
+            marginTop: '70px'
+          }
+        })
+        
         // Reset form
         setFormData({
           name: '',
@@ -344,9 +423,12 @@ const ContactUs = () => {
                       value={formData.email}
                       onChange={handleChange}
                       required
-                      className="w-full px-5 py-3.5 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#B886E8] focus:border-[#B886E8] text-[#22222A] text-base transition-all bg-gray-50 focus:bg-white"
+                      className={`w-full px-5 py-3.5 border-2 ${errors.email ? 'border-red-500' : 'border-gray-200'} rounded-xl focus:outline-none focus:ring-2 focus:ring-[#B886E8] focus:border-[#B886E8] text-[#22222A] text-base transition-all bg-gray-50 focus:bg-white`}
                       placeholder="john@example.com"
                     />
+                    {errors.email && (
+                      <p className="mt-1 text-sm text-red-600">{errors.email}</p>
+                    )}
                   </div>
 
                   <div>
@@ -363,9 +445,12 @@ const ContactUs = () => {
                       value={formData.phone}
                       onChange={handleChange}
                       required
-                      className="w-full px-5 py-3.5 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#B886E8] focus:border-[#B886E8] text-[#22222A] text-base transition-all bg-gray-50 focus:bg-white"
+                      className={`w-full px-5 py-3.5 border-2 ${errors.phone ? 'border-red-500' : 'border-gray-200'} rounded-xl focus:outline-none focus:ring-2 focus:ring-[#B886E8] focus:border-[#B886E8] text-[#22222A] text-base transition-all bg-gray-50 focus:bg-white`}
                       placeholder="+91 9876543210"
                     />
+                    {errors.phone && (
+                      <p className="mt-1 text-sm text-red-600">{errors.phone}</p>
+                    )}
                   </div>
                 </div>
 
@@ -397,16 +482,24 @@ const ContactUs = () => {
                   >
                     Message *
                   </label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    value={formData.message}
-                    onChange={handleChange}
-                    required
-                    rows="6"
-                    className="w-full px-5 py-3.5 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#641DC9] focus:border-[#641DC9] text-[#22222A] resize-none text-base transition-all bg-gray-50 focus:bg-white"
-                    placeholder="Tell us how we can help you..."
-                  />
+                  <div className="relative">
+                    <textarea
+                      id="message"
+                      name="message"
+                      value={formData.message}
+                      onChange={handleChange}
+                      required
+                      rows="6"
+                      className={`w-full px-5 py-3.5 border-2 ${errors.message ? 'border-red-500' : 'border-gray-200'} rounded-xl focus:outline-none focus:ring-2 focus:ring-[#641DC9] focus:border-[#641DC9] text-[#22222A] resize-none text-base transition-all bg-gray-50 focus:bg-white`}
+                      placeholder="Tell us how we can help you..."
+                    />
+                    <div className="absolute bottom-2 right-2 text-xs text-gray-500">
+                      {charCount}/{MAX_WORDS} words
+                    </div>
+                    {errors.message && (
+                      <p className="mt-1 text-sm text-red-600">{errors.message}</p>
+                    )}
+                  </div>
                 </div>
 
                 {/* Submit Button */}

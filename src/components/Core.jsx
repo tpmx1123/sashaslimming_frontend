@@ -1,5 +1,6 @@
 import React from 'react'
 import { motion } from 'framer-motion'
+import { useNavigate } from 'react-router-dom'
 import fatReductionImg from '../../assets/Fat Reduction.svg'
 import inchLossImg from '../../assets/Inch Loss.svg'
 import muscleBuildingImg from '../../assets/Muscle Building & Toning.svg'
@@ -7,6 +8,12 @@ import skinTighteningImg from '../../assets/Skin Tightening.svg'
 import surgicalBodyImg from '../../assets/Surgical Body Sculpting.svg'
 
 const Core = () => {
+  const navigate = useNavigate();
+
+  const handleCardClick = (path) => {
+    navigate(path);
+  };
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -46,31 +53,36 @@ const Core = () => {
       id: 1,
       title: "Fat Reduction",
       description: "Clinically proven fat reduction therapies that eliminate stubborn fat without surgery or downtime.",
-      image: fatReductionImg
+      image: fatReductionImg,
+      path: "/fat-reduction"
     },
     {
       id: 2,
       title: "Inch Loss",
       description: "Targeted inch loss programs that redefine your body's natural contours through non-invasive technologies.",
-      image: inchLossImg
+      image: inchLossImg,
+      path: "/inch-loss"
     },
     {
       id: 3,
       title: "Muscle Building & Toning",
       description: "Strengthen and sculpt your body using advanced EMS and physiotherapist guided toning.",
-      image: muscleBuildingImg
+      image: muscleBuildingImg,
+      path: "/muscle-building-toning"
     },
     {
         id: 4,
         title: "Surgical Body Sculpting",
         description: "For lasting results, our board-certified cosmetic surgeon delivers precision-driven surgical contouring.",
-        image: surgicalBodyImg
+        image: surgicalBodyImg,
+        path: "/surgical-body-sculpting"
     },
     {
       id: 5,
       title: "Skin Tightening",
       description: "Rebuild collagen, restore elasticity, and achieve firmer, smoother skin.",
-      image: skinTighteningImg
+      image: skinTighteningImg,
+      path: "/skin-tightening"
     },
     
   ]
@@ -121,7 +133,7 @@ const Core = () => {
               {treatments.slice(0, 3).map((treatment) => (
                 <motion.div
                   key={treatment.id}
-                  className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 flex flex-col border overflow-hidden h-full"
+                  className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 flex flex-col border overflow-hidden h-full cursor-pointer"
                   style={{ 
                     borderWidth: '1px', 
                     borderColor: 'rgba(100, 29, 201, 0.15)'
@@ -129,6 +141,10 @@ const Core = () => {
                   variants={itemVariants}
                   whileHover={{ scale: 1.03, y: -5 }}
                   transition={{ duration: 0.2 }}
+                  onClick={() => handleCardClick(treatment.path)}
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => e.key === 'Enter' && handleCardClick(treatment.path)}
                 >
                   {/* Image */}
                   <div className="w-full h-[280px] overflow-hidden flex-shrink-0">
@@ -170,10 +186,14 @@ const Core = () => {
               {treatments.slice(3).map((treatment) => (
                 <motion.div
                   key={treatment.id}
-                  className="w-full md:w-[calc(50%-1.5rem)] md:max-w-md lg:w-[calc(33.333%-1.5rem)]"
+                  className="w-full md:w-[calc(50%-1.5rem)] md:max-w-md lg:w-[calc(33.333%-1.5rem)] cursor-pointer"
                   variants={itemVariants}
                   whileHover={{ scale: 1.03, y: -5 }}
                   transition={{ duration: 0.2 }}
+                  onClick={() => handleCardClick(treatment.path)}
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => e.key === 'Enter' && handleCardClick(treatment.path)}
                 >
                   <div className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 flex flex-col border overflow-hidden h-full"
                     style={{ 

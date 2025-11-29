@@ -5,7 +5,6 @@ const faqData = [
   {
     question: 'Is inch loss the same as weight loss?',
     answer: 'No. Inch loss focuses on reducing body measurements in specific areas like the waist, thighs, arms, or hips.'
-
   },
   {
     question: 'How soon will I see a difference?',
@@ -53,35 +52,25 @@ const FlapAskedQuestions = () => {
   };
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 25 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.45, ease: "easeOut" }}
-      style={{
-        width: "100%",
-        maxWidth: "1133.09px",
-        margin: "20px auto 0",
-        backgroundColor: "#FFFFFF",
-        padding: "25px 24px",
-        boxSizing: "border-box",
-      }}
-    >
-      <h1
-        style={{
-          maxWidth: "535px",
-          fontFamily: "Montserrat, sans-serif",
-          fontWeight: 700,
-          fontSize: "clamp(22px, 3vw, 36px)",
-          color: "#61338A",
-          textAlign: "center",
-          margin: "0 auto 25px auto",
-        }}
+    <div className="w-full bg-white pt-0 pb-8 md:pb-12 lg:pb-16 px-4 sm:px-6 md:px-8 lg:px-8">
+      <motion.div
+        initial={{ opacity: 0, y: 25 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.45, ease: "easeOut" }}
+        className="w-full max-w-5xl mx-auto"
       >
-        Frequently Asked Question's
-      </h1>
+        <motion.h2
+          className="font-montserrat text-xl md:text-2xl lg:text-4xl xl:text-4xl font-bold text-[#61338A] text-center mb-6 md:mb-8 lg:mb-10"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+        >
+          Frequently Asked Questions
+        </motion.h2>
 
-      <div className="flex flex-col lg:flex-row items-center lg:items-start justify-center gap-6 md:gap-8 lg:gap-10">
+        <div className="flex flex-col lg:flex-row items-center lg:items-start justify-center gap-6 md:gap-8 lg:gap-10">
           <motion.img
             src="https://res.cloudinary.com/di4caiech/image/upload/v1764045875/faq_kpkxcw.png"
             alt="FAQ Illustration"
@@ -93,104 +82,56 @@ const FlapAskedQuestions = () => {
             className="w-full max-w-[200px] sm:max-w-[250px] md:max-w-[300px] lg:max-w-[350px] cursor-default"
           />
 
-        <motion.div 
-          style={{ display: "flex", flexDirection: "column", gap: "10px", flex: 1 }}
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-        >
-          {faqData.map((item, index) => (
-            <motion.div
-              key={index}
-              variants={cardVariants}
-              whileHover={{ scale: 1.025 }}
-              style={{
-                borderRadius: "16.88px",
-                color: "#392D44",
-                padding: "20px 30px",
-                background: "#F2EFF4",
-                cursor: "pointer",
-                transition: "transform 0.18s ease-out",
-              }}
-              onClick={() => toggleFAQ(index)}
-            >
-              <div style={{ display: "flex", alignItems: "center", marginBottom: "8px" }}>
-                <motion.div
-                  style={{
-                    width: "14px",
-                    height: "14px",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    marginRight: "10px",
-                    color: "#392D44",
-                    fontSize: "16px",
-                    fontWeight: 600,
-                  }}
-                  animate={{ rotate: openIndex === index ? 45 : 0 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  {openIndex === index ? '−' : '+'}
-                </motion.div>
-
-                <h3
-                  style={{
-                    fontFamily: "Montserrat, sans-serif",
-                    fontWeight: 600,
-                    fontSize: "clamp(14px, 2vw, 16px)",
-                    margin: 0,
-                  }}
-                >
-                  {item.question}
-                </h3>
-              </div>
-
-              {openIndex === index && (
-                <motion.div
-                  initial={{ opacity: 0, maxHeight: 0 }}
-                  animate={{ opacity: 1, maxHeight: 500 }}
-                  exit={{ opacity: 0, maxHeight: 0 }}
-                  transition={{ duration: 0.3, ease: "easeInOut" }}
-                  style={{
-                    overflow: "hidden",
-                  }}
-                >
-                  <p
-                    style={{
-                      fontFamily: "Montserrat, sans-serif",
-                      fontWeight: 400,
-                      fontSize: "clamp(11px, 2vw, 12.03px)",
-                      lineHeight: "18.05px",
-                      margin: 0,
-                      paddingLeft: "28px",
-                      paddingTop: "8px",
-                    }}
-                  >
-                    {item.answer}
-                  </p>
-                </motion.div>
-              )}
-            </motion.div>
-          ))}
-
-          <motion.div
-            variants={cardVariants}
-            whileHover={{ x: 4 }}
-            transition={{ type: "spring", stiffness: 340, damping: 16 }}
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: "10px",
-              marginTop: "15px",
-              paddingLeft: "5px",
-              cursor: "pointer",
-            }}
+          <motion.div 
+            className="flex flex-col gap-3 md:gap-4 w-full lg:flex-1"
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
           >
+            {faqData.map((item, index) => (
+              <motion.div
+                key={index}
+                variants={cardVariants}
+                whileHover={{ scale: 1.02 }}
+                className="rounded-2xl text-[#392D44] p-4 md:p-5 lg:p-6 bg-[#F2EFF4] cursor-pointer transition-transform duration-200"
+                onClick={() => toggleFAQ(index)}
+              >
+                <div className="flex items-center mb-2">
+                  <motion.div
+                    className="w-4 h-4 md:w-5 md:h-5 flex items-center justify-center mr-3 md:mr-4 text-[#392D44] text-base md:text-lg font-semibold flex-shrink-0"
+                    animate={{ rotate: openIndex === index ? 45 : 0 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    {openIndex === index ? '−' : '+'}
+                  </motion.div>
+
+                  <h3 className="font-montserrat font-semibold text-sm md:text-base lg:text-lg text-[#392D44] m-0 flex-1 leading-tight">
+                    {item.question}
+                  </h3>
+                </div>
+
+                <AnimatePresence>
+                  {openIndex === index && (
+                    <motion.div
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: 'auto' }}
+                      exit={{ opacity: 0, height: 0 }}
+                      transition={{ duration: 0.3, ease: "easeInOut" }}
+                      className="overflow-hidden"
+                    >
+                      <p className="font-montserrat font-normal text-xs md:text-sm lg:text-base leading-relaxed m-0 pl-7 md:pl-8 lg:pl-9 pt-2 md:pt-3 text-[#392D44]">
+                        {item.answer}
+                      </p>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.div>
+            ))}
           </motion.div>
-        </motion.div>
-      </div>
-    </motion.div>
+        </div>
+      </motion.div>
+    </div>
   );
 };
 

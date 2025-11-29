@@ -1,5 +1,6 @@
 import React from 'react'
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom'
+import ScrollToTop from './components/ScrollToTop';
 import Navbar from './components/Navbar'
 import Home from './components/Home'
 import Core from './components/Core'
@@ -15,8 +16,8 @@ import FatReduction from './components/fat-reduction/FatReduction'
 import SurgicalBodySculpting from './components/surgical-body-sculpting/surgical-body-sculpting'
 import MuscleBuildingToning from './components/muscle-building&toning/MuscleHero'
 import ErrorPage from './components/ErrorPage'
-import ContactUs from './components/ContactUs'   // ✅ ADDED
-
+import ContactUs from './components/ContactUs'   
+import Blog from './components/blog'
 
 
 function AppContent() {
@@ -29,13 +30,14 @@ function AppContent() {
     '/fat-reduction',
     '/surgical-body-sculpting',
     '/muscle-building-toning',
-    '/contact-us'   // ✅ ADDED
+    '/contact-us'   
   ]
 
   const isErrorPage = !validRoutes.includes(location.pathname)
 
   return (
     <div className="App">
+      <ScrollToTop />
       {!isErrorPage && <Navbar />}
 
       <Routes>
@@ -101,6 +103,7 @@ function AppContent() {
             <Footer />
           </>
         } />
+        <Route path="/blog" element={<><Navbar /><Blog /><Footer /></>} />
 
         <Route path="*" element={<ErrorPage />} />
       </Routes>

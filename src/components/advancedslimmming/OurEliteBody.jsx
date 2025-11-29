@@ -49,7 +49,7 @@ const OurEliteBody = () => {
         {/* Section 1 - First Paragraph */}
         <motion.div className="mb-6 md:mb-8" variants={itemVariants}>
           <p className="text-base md:text-lg lg:text-xl text-gray-700  font-poppins leading-loose" style={{lineHeight: '1.8'}}>
-            At <span className="font-bold">Sasha Luxe</span>, we blend medical precision with aesthetic vision. Whether you're struggling with belly fat, water retention, or stubborn inches that won't go our <span className="font-bold">non-surgical fat loss programs</span> help you shed fat, sculpt your shape, and feel your best.
+            At <span className="font-bold">Sasha Luxe</span>, we blend medical precision with aesthetic vision. Whether you're struggling with belly fat, water retention, or stubborn inches that won't go, our <span className="font-bold">non-surgical fat loss programs</span> help you shed fat, sculpt your shape, and feel your best.
           </p>
         </motion.div>
 
