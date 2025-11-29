@@ -19,7 +19,6 @@ import ErrorPage from './components/ErrorPage'
 import ContactUs from './components/ContactUs'   
 import Blog from './components/blog'
 
-
 function AppContent() {
   const location = useLocation()
   const validRoutes = [
