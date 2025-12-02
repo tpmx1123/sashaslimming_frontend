@@ -75,15 +75,15 @@ const AdminLogin = () => {
                 Password
               </label>
               <div className="relative">
-                <input
-                  id="password"
+              <input
+                id="password"
                   type={showPassword ? "text" : "password"}
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
                   className="w-full px-4 py-3 pr-12 bg-white/20 border-2 border-white/30 rounded-lg text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-[#E8D5FF] focus:border-[#E8D5FF] transition-all"
-                  placeholder="Enter password"
-                />
+                placeholder="Enter password"
+              />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}

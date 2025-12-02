@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import bannerImage from '../../assets/Banner.svg';
 import BookModel from './BookModel';
 
 const mobileHeroImage = "https://res.cloudinary.com/di4caiech/image/upload/v1764235891/Mask_group_c5pd3w.png";
@@ -97,7 +96,7 @@ const Home = () => {
       {/* DESKTOP VIEW */}
       <motion.div
         className="hidden lg:block w-full relative pt-24 bg-no-repeat bg-right bg-contain"
-        style={{ backgroundImage: `url(${bannerImage})`, minHeight: "750px" }}
+        style={{ backgroundImage: `url(${'https://res.cloudinary.com/di4caiech/image/upload/v1764670173/Banner_pczusw.svg'})`, minHeight: "750px" }}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}

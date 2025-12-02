@@ -63,24 +63,24 @@ const ChangePassword = () => {
 
   return (
     <div className="max-w-2xl mx-auto">
-      <div className="bg-white/10 backdrop-blur-lg rounded-xl shadow-lg p-8 border border-white/20">
-        <h2 className="text-2xl font-bold text-white mb-6">Change Password</h2>
+      <div className="bg-white rounded-xl shadow-lg p-8 border border-gray-200">
+        <h2 className="text-3xl font-bold text-gray-700 mb-6">Change Password</h2>
 
         {error && (
-          <div className="bg-red-500/20 border border-red-500/50 text-red-200 px-4 py-3 rounded-lg mb-6">
+          <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-6">
             {error}
           </div>
         )}
 
         {success && (
-          <div className="bg-green-500/20 border border-green-500/50 text-green-200 px-4 py-3 rounded-lg mb-6">
+          <div className="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-lg mb-6">
             {success}
           </div>
         )}
 
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
-            <label className="block text-sm font-medium text-gray-300 mb-2">
+            <label className="block text-sm font-medium text-gray-700 mb-2">
               Current Password
             </label>
             <input
@@ -90,13 +90,13 @@ const ChangePassword = () => {
               onChange={(e) =>
                 setFormData({ ...formData, currentPassword: e.target.value })
               }
-              className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#61338A] focus:border-[#61338A]"
               placeholder="Enter your current password"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-300 mb-2">
+            <label className="block text-sm font-medium text-gray-700 mb-2">
               New Password
             </label>
             <input
@@ -106,17 +106,17 @@ const ChangePassword = () => {
               onChange={(e) =>
                 setFormData({ ...formData, newPassword: e.target.value })
               }
-              className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#61338A] focus:border-[#61338A]"
               placeholder="Enter your new password (min. 6 characters)"
               minLength={6}
             />
-            <p className="text-gray-400 text-xs mt-1">
+            <p className="text-gray-500 text-xs mt-1">
               Password must be at least 6 characters long
             </p>
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-300 mb-2">
+            <label className="block text-sm font-medium text-gray-700 mb-2">
               Confirm New Password
             </label>
             <input
@@ -126,7 +126,7 @@ const ChangePassword = () => {
               onChange={(e) =>
                 setFormData({ ...formData, confirmPassword: e.target.value })
               }
-              className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#61338A] focus:border-[#61338A]"
               placeholder="Confirm your new password"
               minLength={6}
             />
@@ -135,17 +135,17 @@ const ChangePassword = () => {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-gray-600 disabled:cursor-not-allowed text-white font-semibold py-3 px-4 rounded-lg transition-colors"
+            className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed text-white font-semibold py-3 px-4 rounded-lg transition-colors"
           >
             {loading ? 'Changing Password...' : 'Change Password'}
           </button>
         </form>
 
-        <div className="mt-6 p-4 bg-yellow-500/20 border border-yellow-500/50 rounded-lg">
-          <p className="text-yellow-200 text-sm">
+        <div className="mt-6 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
+          <p className="text-yellow-800 text-sm font-medium">
             <strong>Security Tips:</strong>
           </p>
-          <ul className="text-yellow-200/80 text-sm mt-2 list-disc list-inside space-y-1">
+          <ul className="text-yellow-700 text-sm mt-2 list-disc list-inside space-y-1">
             <li>Use a strong password with a mix of letters, numbers, and symbols</li>
             <li>Don't share your password with anyone</li>
             <li>Change your password regularly</li>

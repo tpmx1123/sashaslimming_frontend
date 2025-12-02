@@ -25,6 +25,7 @@ import BlogFormWrapper from './components/admin/BlogFormWrapper'
 import ProtectedRoute from './components/ProtectedRoute'
 import PrivacyPolicy from './components/PrivacyPolicy'
 import TermsAndConditions from './components/TermsAndConditions'
+import CookieBanner from './components/CookieBanner'
 
 function AppContent() {
   const location = useLocation()
@@ -149,6 +150,9 @@ function AppContent() {
 
         <Route path="*" element={<ErrorPage />} />
       </Routes>
+      
+      {/* Cookie Banner - Show on all pages except admin routes */}
+      {!isAdminRoute && <CookieBanner />}
     </div>
   )
 }

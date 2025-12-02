@@ -82,7 +82,7 @@ const Overview = () => {
   if (loading) {
     return (
       <div className="flex items-center justify-center py-12">
-        <div className="text-white text-lg">Loading statistics...</div>
+        <div className="text-[#61338A] text-lg">Loading statistics...</div>
       </div>
     );
   }
@@ -91,107 +91,137 @@ const Overview = () => {
     <div className="space-y-6">
       {/* Statistics Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <div className="bg-gradient-to-br from-blue-600 to-blue-700 rounded-xl shadow-lg p-6 border border-blue-500/20">
+        {/* Total Appointments */}
+        <div className="bg-white rounded-xl shadow-md p-6 border border-gray-200">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-blue-100 text-sm font-medium mb-1">Total Appointments</p>
-              <p className="text-3xl font-bold text-white">{stats.totalBookings}</p>
+              <p className="text-gray-600 text-sm font-medium mb-1">Total Appointments</p>
+              <p className="text-3xl font-bold text-gray-900">{stats.totalBookings}</p>
+              <p className="text-gray-500 text-xs mt-1">{stats.unreadBookings} pending</p>
             </div>
-            <div className="bg-blue-500/20 rounded-lg p-3">
-              <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="bg-blue-100 rounded-lg p-3">
+              <svg className="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
               </svg>
             </div>
           </div>
         </div>
 
-        <div className="bg-gradient-to-br from-orange-600 to-orange-700 rounded-xl shadow-lg p-6 border border-orange-500/20">
+        {/* Contact Messages */}
+        <div className="bg-white rounded-xl shadow-md p-6 border border-gray-200">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-orange-100 text-sm font-medium mb-1">Unread Appointments</p>
-              <p className="text-3xl font-bold text-white">{stats.unreadBookings}</p>
+              <p className="text-gray-600 text-sm font-medium mb-1">Contact Messages</p>
+              <p className="text-3xl font-bold text-gray-900">0</p>
+              <p className="text-gray-500 text-xs mt-1">+0%</p>
             </div>
-            <div className="bg-orange-500/20 rounded-lg p-3">
-              <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 00-2-2H4a2 2 0 00-2 2v.341C.67 6.165 0 7.626 0 9v5.158a2.032 2.032 0 00.595 1.437L2 17h5m8 0v1a3 3 0 11-6 0v-1m8 0H9" />
+            <div className="bg-green-100 rounded-lg p-3">
+              <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
               </svg>
             </div>
           </div>
         </div>
 
-        <div className="bg-gradient-to-br from-green-600 to-green-700 rounded-xl shadow-lg p-6 border border-green-500/20">
+        {/* Blog Posts */}
+        <div className="bg-white rounded-xl shadow-md p-6 border border-gray-200">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-green-100 text-sm font-medium mb-1">Active Subscribers</p>
-              <p className="text-3xl font-bold text-white">{stats.activeSubscribers}</p>
+              <p className="text-gray-600 text-sm font-medium mb-1">Blog Posts</p>
+              <p className="text-3xl font-bold text-gray-900">{stats.totalBlogs}</p>
+              <p className="text-gray-500 text-xs mt-1">{stats.publishedBlogs} published</p>
             </div>
-            <div className="bg-green-500/20 rounded-lg p-3">
-              <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-              </svg>
-            </div>
-          </div>
-        </div>
-
-        <div className="bg-gradient-to-br from-purple-600 to-purple-700 rounded-xl shadow-lg p-6 border border-purple-500/20">
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-purple-100 text-sm font-medium mb-1">Published Blogs</p>
-              <p className="text-3xl font-bold text-white">{stats.publishedBlogs}</p>
-            </div>
-            <div className="bg-purple-500/20 rounded-lg p-3">
-              <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="bg-purple-100 rounded-lg p-3">
+              <svg className="w-8 h-8 text-[#61338A]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
               </svg>
             </div>
           </div>
         </div>
+
+        {/* Subscribers */}
+        <div className="bg-white rounded-xl shadow-md p-6 border border-gray-200">
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-gray-600 text-sm font-medium mb-1">Subscribers</p>
+              <p className="text-3xl font-bold text-gray-900">{stats.totalSubscribers}</p>
+              <p className="text-gray-500 text-xs mt-1">{stats.activeSubscribers} active</p>
+            </div>
+            <div className="bg-pink-100 rounded-lg p-3">
+              <svg className="w-8 h-8 text-pink-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+              </svg>
+            </div>
+          </div>
+        </div>
       </div>
 
-      {/* Additional Stats */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div className="bg-white/10 backdrop-blur-lg rounded-xl shadow-lg p-6 border border-white/20">
-          <p className="text-gray-300 text-sm font-medium mb-2">Today's Appointments</p>
-          <p className="text-2xl font-bold text-white">{stats.todayBookings}</p>
-        </div>
+      {/* Quick Actions */}
+      <div className="mt-8">
+        <h2 className="text-xl font-bold text-gray-900 mb-4">Quick Actions</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <button
+            onClick={() => window.location.href = '/admin/blog/new'}
+            className="bg-white rounded-xl shadow-md p-6 border border-gray-200 hover:shadow-lg transition-shadow text-left group"
+          >
+            <div className="flex items-center gap-4">
+              <div className="bg-[#61338A] rounded-lg p-4 group-hover:scale-110 transition-transform">
+                <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                </svg>
+              </div>
+              <div>
+                <h3 className="text-lg font-semibold text-gray-900">New Blog Post</h3>
+                <p className="text-gray-600 text-sm">Create a new blog article</p>
+              </div>
+            </div>
+          </button>
 
-        <div className="bg-white/10 backdrop-blur-lg rounded-xl shadow-lg p-6 border border-white/20">
-          <p className="text-gray-300 text-sm font-medium mb-2">Total Subscribers</p>
-          <p className="text-2xl font-bold text-white">{stats.totalSubscribers}</p>
-        </div>
-
-        <div className="bg-white/10 backdrop-blur-lg rounded-xl shadow-lg p-6 border border-white/20">
-          <p className="text-gray-300 text-sm font-medium mb-2">Total Blog Posts</p>
-          <p className="text-2xl font-bold text-white">{stats.totalBlogs}</p>
+          <button
+            onClick={() => window.location.href = '/admin-panel?tab=appointments'}
+            className="bg-white rounded-xl shadow-md p-6 border border-gray-200 hover:shadow-lg transition-shadow text-left group"
+          >
+            <div className="flex items-center gap-4">
+              <div className="bg-blue-500 rounded-lg p-4 group-hover:scale-110 transition-transform">
+                <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+              </div>
+              <div>
+                <h3 className="text-lg font-semibold text-gray-900">View Appointments</h3>
+                <p className="text-gray-600 text-sm">Manage bookings</p>
+              </div>
+            </div>
+          </button>
         </div>
       </div>
 
       {/* Recent Appointments */}
-      <div className="bg-white/10 backdrop-blur-lg rounded-xl shadow-lg p-6 border border-white/20">
-        <h3 className="text-xl font-bold text-white mb-4">Recent Appointments</h3>
+      <div className="bg-white rounded-xl shadow-md p-6 border border-gray-200">
+        <h3 className="text-xl font-bold text-gray-900 mb-4">Recent Appointments</h3>
         {recentBookings.length === 0 ? (
-          <p className="text-gray-400">No appointments yet</p>
+          <p className="text-gray-500">No appointments yet</p>
         ) : (
           <div className="space-y-3">
             {recentBookings.map((booking) => (
               <div
                 key={booking.id}
-                className="bg-white/5 rounded-lg p-4 border border-white/10 hover:bg-white/10 transition-colors"
+                className="bg-gray-50 rounded-lg p-4 border border-gray-200 hover:bg-gray-100 transition-colors"
               >
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-white font-medium">{booking.name}</p>
-                    <p className="text-gray-400 text-sm">{booking.serviceName}</p>
-                    <p className="text-gray-400 text-xs mt-1">
+                    <p className="text-gray-900 font-medium">{booking.name}</p>
+                    <p className="text-gray-600 text-sm">{booking.serviceName}</p>
+                    <p className="text-gray-500 text-xs mt-1">
                       {booking.date} at {booking.time}
                     </p>
                   </div>
                   <div className="flex items-center gap-2">
                     {!booking.isRead && (
-                      <span className="bg-orange-500 text-white text-xs px-2 py-1 rounded-full">New</span>
+                      <span className="bg-orange-100 text-orange-700 text-xs px-2 py-1 rounded-full font-medium">New</span>
                     )}
-                    <span className={`text-xs px-2 py-1 rounded-full ${
-                      booking.isRead ? 'bg-green-500/20 text-green-400' : 'bg-orange-500/20 text-orange-400'
+                    <span className={`text-xs px-2 py-1 rounded-full font-medium ${
+                      booking.isRead ? 'bg-green-100 text-green-700' : 'bg-orange-100 text-orange-700'
                     }`}>
                       {booking.isRead ? 'Read' : 'Unread'}
                     </span>

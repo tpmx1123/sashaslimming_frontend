@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
 import { motion } from 'framer-motion'
-import beforeImage1 from '../../assets/before.png'
-import afterImage1 from '../../assets/after.png'
-import beforeImage2 from '../../assets/before.png'
-import afterImage2 from '../../assets/after.png'
+// Image URLs
+const beforeImage1 = 'https://res.cloudinary.com/di4caiech/image/upload/v1764670173/before_hj2nhk.png';
+const afterImage1 = 'https://res.cloudinary.com/di4caiech/image/upload/v1764670173/after_ov7fi2.png';
+const beforeImage2 = 'https://res.cloudinary.com/di4caiech/image/upload/v1764672773/6636_1_f3cbch.png';
+const afterImage2 = 'https://res.cloudinary.com/di4caiech/image/upload/v1764672773/6636_2_pkkpzr.png';
 import BookModel from './BookModel'
 import BeforeAfterSlider from './BeforeAfterSlider'
 

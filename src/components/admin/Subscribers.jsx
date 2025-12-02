@@ -99,7 +99,7 @@ const Subscribers = () => {
   if (loading) {
     return (
       <div className="flex items-center justify-center py-12">
-        <div className="text-white text-lg">Loading subscribers...</div>
+        <div className="text-gray-700 text-lg">Loading subscribers...</div>
       </div>
     );
   }
@@ -108,7 +108,7 @@ const Subscribers = () => {
     <div className="space-y-6">
       {/* Header */}
       <div className="flex flex-col md:flex-row gap-4 items-start md:items-center justify-between">
-        <h2 className="text-2xl font-bold text-white">Newsletter Subscribers</h2>
+        <h2 className="text-3xl font-bold text-gray-700">Newsletter Subscribers</h2>
         
         <div className="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
           <input
@@ -116,13 +116,13 @@ const Subscribers = () => {
             placeholder="Search by email..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="px-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="px-4 py-2 bg-white border border-gray-300 rounded-lg text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#61338A] focus:border-[#61338A]"
           />
           
           <select
             value={filterStatus}
             onChange={(e) => setFilterStatus(e.target.value)}
-            className="px-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="px-4 py-2 bg-white border border-gray-300 rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#61338A] focus:border-[#61338A]"
           >
             <option value="all">All Subscribers</option>
             <option value="active">Active Only</option>
@@ -146,40 +146,40 @@ const Subscribers = () => {
 
       {/* Subscribers List */}
       {filteredSubscribers.length === 0 ? (
-        <div className="bg-white/10 backdrop-blur-lg rounded-xl shadow-lg p-8 border border-white/20 text-center">
-          <p className="text-gray-400 text-lg">No subscribers found</p>
+        <div className="bg-white rounded-xl shadow-md p-8 border border-gray-200 text-center">
+          <p className="text-gray-600 text-lg">No subscribers found</p>
         </div>
       ) : (
-        <div className="bg-white/10 backdrop-blur-lg rounded-xl shadow-lg border border-white/20 overflow-hidden">
+        <div className="bg-white rounded-xl shadow-md border border-gray-200 overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full">
-              <thead className="bg-white/5">
+              <thead className="bg-gray-50">
                 <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Email</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Status</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Subscribed Date</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Actions</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider">Email</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider">Status</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider">Subscribed Date</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider">Actions</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-white/10">
+              <tbody className="divide-y divide-gray-200">
                 {filteredSubscribers.map((subscriber) => (
-                  <tr key={subscriber.id} className="hover:bg-white/5 transition-colors">
+                  <tr key={subscriber.id} className="hover:bg-gray-50 transition-colors">
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm font-medium text-white">{subscriber.email}</div>
+                      <div className="text-sm font-medium text-gray-600">{subscriber.email}</div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       {subscriber.isActive ? (
-                        <span className="px-2 py-1 text-xs font-semibold rounded-full bg-green-500/20 text-green-400">
+                        <span className="px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-700">
                           Active
                         </span>
                       ) : (
-                        <span className="px-2 py-1 text-xs font-semibold rounded-full bg-gray-500/20 text-gray-400">
+                        <span className="px-2 py-1 text-xs font-semibold rounded-full bg-gray-100 text-gray-700">
                           Inactive
                         </span>
                       )}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm text-gray-300">
+                      <div className="text-sm text-gray-600">
                         {formatDate(subscriber.subscribedAt)}
                       </div>
                     </td>
@@ -189,15 +189,15 @@ const Subscribers = () => {
                           onClick={() => handleToggleStatus(subscriber)}
                           className={`${
                             subscriber.isActive
-                              ? 'text-orange-400 hover:text-orange-300'
-                              : 'text-green-400 hover:text-green-300'
+                              ? 'text-orange-600 hover:text-orange-700'
+                              : 'text-green-600 hover:text-green-700'
                           } transition-colors`}
                         >
                           {subscriber.isActive ? 'Deactivate' : 'Activate'}
                         </button>
                         <button
                           onClick={() => handleDelete(subscriber.id)}
-                          className="text-red-400 hover:text-red-300 transition-colors"
+                          className="text-red-600 hover:text-red-700 transition-colors"
                         >
                           Delete
                         </button>
@@ -212,10 +212,10 @@ const Subscribers = () => {
       )}
 
       {/* Summary */}
-      <div className="bg-white/10 backdrop-blur-lg rounded-xl shadow-lg p-4 border border-white/20">
-        <p className="text-gray-300 text-sm">
-          Showing <span className="font-semibold text-white">{filteredSubscribers.length}</span> of{' '}
-          <span className="font-semibold text-white">{subscribers.length}</span> subscribers
+      <div className="bg-white rounded-lg shadow-sm p-4 border border-gray-200">
+        <p className="text-gray-600 text-sm">
+          Showing <span className="font-semibold text-gray-900">{filteredSubscribers.length}</span> of{' '}
+          <span className="font-semibold text-gray-900">{subscribers.length}</span> subscribers
         </p>
       </div>
 

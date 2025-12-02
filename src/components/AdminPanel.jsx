@@ -89,16 +89,16 @@ const AdminPanel = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-900">
-        <div className="text-white text-xl">Loading...</div>
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <div className="text-[#61338A] text-xl">Loading...</div>
       </div>
     );
   }
 
   if (error && !profile) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-900">
-        <div className="bg-red-500/20 border border-red-500/50 text-red-200 px-6 py-4 rounded-lg">
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <div className="bg-red-50 border border-red-200 text-red-700 px-6 py-4 rounded-lg">
           {error}
         </div>
       </div>
@@ -106,49 +106,32 @@ const AdminPanel = () => {
   }
 
   return (
-    <div 
-      className="min-h-screen relative"
-      style={{
-        background: `
-          linear-gradient(135deg, #22222A 0%, #61338A 25%, #B886E8 50%, #61338A 75%, #22222A 100%),
-          radial-gradient(circle at 20% 50%, rgba(97, 51, 138, 0.3) 0%, transparent 50%),
-          radial-gradient(circle at 80% 80%, rgba(184, 134, 232, 0.2) 0%, transparent 50%),
-          radial-gradient(circle at 40% 20%, rgba(232, 213, 255, 0.15) 0%, transparent 50%)
-        `,
-        backgroundSize: '100% 100%, 100% 100%, 100% 100%, 100% 100%',
-        backgroundAttachment: 'fixed'
-      }}
-    >
-      {/* Animated background overlay */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-0 left-0 w-full h-full opacity-10">
-          <div className="absolute top-20 left-10 w-72 h-72 bg-[#B886E8] rounded-full mix-blend-multiply filter blur-3xl animate-blob"></div>
-          <div className="absolute top-40 right-10 w-72 h-72 bg-[#61338A] rounded-full mix-blend-multiply filter blur-3xl animate-blob animation-delay-2000"></div>
-          <div className="absolute bottom-20 left-1/2 w-72 h-72 bg-[#E8D5FF] rounded-full mix-blend-multiply filter blur-3xl animate-blob animation-delay-4000"></div>
-        </div>
-      </div>
-      <div className="relative z-10">
+    <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <header className="bg-gradient-to-r from-[#61338A] to-[#B886E8] border-b-2 border-[#61338A] shadow-lg">
+      <header className="bg-white border-b border-gray-200 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-4">
             <div>
-              <h1 className="text-2xl font-bold text-white">Admin Panel</h1>
-              <p className="text-white/90 text-sm">Welcome back, {profile?.username}</p>
+              <h1 className="text-2xl font-bold text-[#61338A]">SASHA LUXE SLIMMING</h1>
+              <p className="text-gray-600 text-sm">Welcome back, {profile?.username}</p>
             </div>
             <div className="flex gap-3">
               <button
                 onClick={() => navigate('/')}
-                className="bg-white/80 hover:bg-white/30 backdrop-blur-sm text-[#61338A] px-4 py-2 rounded-lg transition-colors flex items-center gap-2 border border-white/30"
+                className="bg-white border border-[#61338A] text-[#61338A] hover:bg-[#61338A] hover:text-white px-4 py-2 rounded-lg transition-colors flex items-center gap-2"
               >
-                <span>🏠</span>
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                </svg>
                 <span>Home</span>
               </button>
               <button
                 onClick={handleLogout}
-                className="bg-red-500/80 hover:bg-red-600 backdrop-blur-sm text-white px-4 py-2 rounded-lg transition-colors flex items-center gap-2 border border-red-400/50"
+                className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg transition-colors flex items-center gap-2"
               >
-                <span>🚪</span>
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                </svg>
                 <span>Logout</span>
               </button>
             </div>
@@ -160,7 +143,7 @@ const AdminPanel = () => {
         <div className="flex flex-col lg:flex-row gap-6">
           {/* Sidebar Navigation */}
           <aside className="lg:w-64 flex-shrink-0">
-            <nav className="bg-gradient-to-br from-[#61338A]/80 to-[#B886E8]/80 backdrop-blur-lg rounded-xl shadow-lg border-2 border-[#61338A]/50 p-4">
+            <nav className="bg-[#b47ee4] rounded-xl shadow-lg p-4">
               <ul className="space-y-2">
                 {tabs.map((tab) => (
                   <li key={tab.id}>
@@ -168,8 +151,8 @@ const AdminPanel = () => {
                       onClick={() => handleTabChange(tab.id)}
                       className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-all text-left ${
                         activeTab === tab.id
-                          ? 'bg-white text-[#61338A] shadow-lg transform scale-105'
-                          : 'text-white/90 hover:bg-white/20 hover:text-white'
+                          ? 'bg-[#7a4ba3] text-white shadow-md'
+                          : 'text-white/90 hover:bg-white/10 hover:text-white'
                       }`}
                     >
                       <span className="text-xl">{tab.icon}</span>
@@ -181,20 +164,35 @@ const AdminPanel = () => {
             </nav>
 
             {/* Profile Card */}
-            <div className="mt-6 bg-gradient-to-br from-[#61338A]/60 to-[#B886E8]/60 backdrop-blur-lg rounded-xl shadow-lg border-2 border-[#61338A]/50 p-4">
-              <h3 className="text-sm font-medium text-white mb-3">Profile</h3>
-              <div className="space-y-2 text-sm">
-                <div>
-                  <span className="text-white/80">Username:</span>
-                  <span className="text-white ml-2 font-medium">{profile?.username || 'N/A'}</span>
+            <div className="mt-6 bg-white rounded-xl shadow-lg border border-gray-200 p-4">
+              <h3 className="text-sm font-semibold text-[#61338A] mb-3">Account Info</h3>
+              <div className="space-y-3 text-sm">
+                <div className="flex items-center gap-2">
+                  <svg className="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                  </svg>
+                  <div>
+                    <span className="text-gray-600">Username: </span>
+                    <span className="text-gray-900 font-medium">{profile?.username || 'N/A'}</span>
+                  </div>
                 </div>
-                <div>
-                  <span className="text-white/80">Email:</span>
-                  <span className="text-white ml-2 font-medium">{profile?.email || 'N/A'}</span>
+                <div className="flex items-center gap-2">
+                  <svg className="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
+                  <div>
+                    <span className="text-gray-600">Email: </span>
+                    <span className="text-gray-900 font-medium">{profile?.email || 'N/A'}</span>
+                  </div>
                 </div>
-                <div>
-                  <span className="text-white/80">Role:</span>
-                  <span className="text-[#E8D5FF] ml-2 font-medium">{profile?.role || 'N/A'}</span>
+                <div className="flex items-center gap-2">
+                  <svg className="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                  </svg>
+                  <div>
+                    <span className="text-gray-600">Role: </span>
+                    <span className="text-[#61338A] font-medium">{profile?.role || 'N/A'}</span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -205,7 +203,6 @@ const AdminPanel = () => {
             {renderContent()}
           </main>
         </div>
-      </div>
       </div>
     </div>
   );

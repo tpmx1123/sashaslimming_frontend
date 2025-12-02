@@ -45,37 +45,37 @@ const WhySasha = () => {
   const features = [
     {
       id: 1,
-      image: doctorLedExpertiseImg,
+      image: 'https://res.cloudinary.com/di4caiech/image/upload/v1764670386/Doctor-Led_Expertise_aayoqe.png',
       title: 'Doctor-Led Expertise',
       description: 'Medically supervised treatments by certified aesthetic professionals'
     },
     {
       id: 2,
-      image: evidenceBasedTreatmentsImg,
+      image: 'https://res.cloudinary.com/di4caiech/image/upload/v1764670386/Evidence-Based_Treatments_jpa8u4.png',
       title: 'Evidence-Based Treatments',
       description: 'Non-surgical, FDA-approved technologies with proven results'
     },
     {
       id: 3,
-      image: measurableResultsImg,
+      image: 'https://res.cloudinary.com/di4caiech/image/upload/v1764670422/Measurable_Results_tay844.png',
       title: 'Measurable Results',
       description: 'Real, quantifiable inch loss and fat reduction outcomes'
     },
     {
       id: 4,
-      image: customDesignedPlansImg,
+      image: 'https://res.cloudinary.com/di4caiech/image/upload/v1764670371/Custom-Designed_Plans_rarja0.png',
       title: 'Custom-Designed Plans',
       description: 'Personalized programs tailored to your body composition'
     },
     {
       id: 5,
-      image: luxuryExperienceImg,
+      image: 'https://res.cloudinary.com/di4caiech/image/upload/v1764670421/Luxury_Experience_wym84b.png',
       title: 'Luxury Experience',
       description: 'Refined, comfortable treatments in a premium setting'
     },
     {
       id: 6,
-      image: ongoingSupportImg,
+      image: 'https://res.cloudinary.com/di4caiech/image/upload/v1764670468/Ongoing_Support_tm9k3h.png',
       title: 'Ongoing Support',
       description: 'Seamless post-care and maintenance programs'
     }

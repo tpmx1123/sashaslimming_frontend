@@ -1,11 +1,6 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
-import fatReductionImg from '../../assets/Fat Reduction.svg'
-import inchLossImg from '../../assets/Inch Loss.svg'
-import muscleBuildingImg from '../../assets/Muscle Building & Toning.svg'
-import skinTighteningImg from '../../assets/Skin Tightening.svg'
-import surgicalBodyImg from '../../assets/Surgical Body Sculpting.svg'
 
 const Core = () => {
   const navigate = useNavigate();
@@ -53,35 +48,35 @@ const Core = () => {
       id: 1,
       title: "Fat Reduction",
       description: "Clinically proven fat reduction therapies that eliminate stubborn fat without surgery or downtime.",
-      image: fatReductionImg,
+      image: 'https://res.cloudinary.com/di4caiech/image/upload/v1764670438/Fat_Reduction_ncsvev.svg',
       path: "/fat-reduction"
     },
     {
       id: 2,
       title: "Inch Loss",
       description: "Targeted inch loss programs that redefine your body's natural contours through non-invasive technologies.",
-      image: inchLossImg,
+      image: 'https://res.cloudinary.com/di4caiech/image/upload/v1764670455/Inch_Loss_rleuoo.svg',
       path: "/inch-loss"
     },
     {
       id: 3,
       title: "Muscle Building & Toning",
       description: "Strengthen and sculpt your body using advanced EMS and physiotherapist guided toning.",
-      image: muscleBuildingImg,
+      image: 'https://res.cloudinary.com/di4caiech/image/upload/v1764670467/Muscle_Building_Toning_hqully.svg',
       path: "/muscle-building-toning"
     },
     {
         id: 4,
         title: "Surgical Body Sculpting",
         description: "For lasting results, our board-certified cosmetic surgeon delivers precision-driven surgical contouring.",
-        image: surgicalBodyImg,
+        image: 'https://res.cloudinary.com/di4caiech/image/upload/v1764673948/Surgical_Body_Sculpting_xqtvi0.jpg',
         path: "/surgical-body-sculpting"
     },
     {
       id: 5,
       title: "Skin Tightening",
       description: "Rebuild collagen, restore elasticity, and achieve firmer, smoother skin.",
-      image: skinTighteningImg,
+      image: 'https://res.cloudinary.com/di4caiech/image/upload/v1764670468/Skin_Tightening_zjevjg.svg',
       path: "/skin-tightening"
     },
     
@@ -168,7 +163,7 @@ const Core = () => {
 
                     {/* Learn More Link */}
                     <a
-                      href="#"
+                      href=""
                       className="text-[#22222A] text-sm md:text-base font-medium hover:text-[#B886E8] transition-colors text-left inline-block mt-auto"
                     >
                       Learn More →

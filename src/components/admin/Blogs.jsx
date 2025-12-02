@@ -161,7 +161,7 @@ const Blogs = () => {
   if (loading) {
     return (
       <div className="flex items-center justify-center py-12">
-        <div className="text-white text-lg">Loading blogs...</div>
+        <div className="text-gray-700 text-lg">Loading blogs...</div>
       </div>
     );
   }
@@ -170,27 +170,27 @@ const Blogs = () => {
     <div className="space-y-6">
       {/* Statistics Cards */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-        <div className="bg-gradient-to-br from-[#61338A] to-[#B886E8] rounded-xl shadow-lg p-4 border border-[#61338A]/20">
-          <p className="text-white/80 text-sm font-medium mb-1">Total Blogs</p>
+        <div className="bg-[#61338A] rounded-xl shadow-md p-4 border border-[#61338A]">
+          <p className="text-white/90 text-sm font-medium mb-1">Total Blogs</p>
           <p className="text-2xl font-bold text-white">{stats.total}</p>
         </div>
-        <div className="bg-gradient-to-br from-green-600 to-green-500 rounded-xl shadow-lg p-4 border border-green-500/20">
-          <p className="text-white/80 text-sm font-medium mb-1">Published</p>
+        <div className="bg-green-600 rounded-xl shadow-md p-4 border border-green-600">
+          <p className="text-white/90 text-sm font-medium mb-1">Published</p>
           <p className="text-2xl font-bold text-white">{stats.published}</p>
         </div>
-        <div className="bg-gradient-to-br from-gray-600 to-gray-500 rounded-xl shadow-lg p-4 border border-gray-500/20">
-          <p className="text-white/80 text-sm font-medium mb-1">Drafts</p>
+        <div className="bg-gray-600 rounded-xl shadow-md p-4 border border-gray-600">
+          <p className="text-white/90 text-sm font-medium mb-1">Drafts</p>
           <p className="text-2xl font-bold text-white">{stats.draft}</p>
         </div>
-        <div className="bg-gradient-to-br from-yellow-600 to-yellow-500 rounded-xl shadow-lg p-4 border border-yellow-500/20">
-          <p className="text-white/80 text-sm font-medium mb-1">Featured</p>
+        <div className="bg-yellow-500 rounded-xl shadow-md p-4 border border-yellow-500">
+          <p className="text-white/90 text-sm font-medium mb-1">Featured</p>
           <p className="text-2xl font-bold text-white">{stats.featured}</p>
         </div>
       </div>
 
       {/* Header with Filters */}
       <div className="flex flex-col md:flex-row gap-4 items-start md:items-center justify-between">
-        <h2 className="text-2xl font-bold text-white">Blog Management</h2>
+        <h2 className="text-3xl font-bold text-gray-700">Blog Management</h2>
         
         <div className="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
           <input
@@ -201,7 +201,7 @@ const Blogs = () => {
               setSearchTerm(e.target.value);
               setCurrentPage(1);
             }}
-            className="px-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#61338A]"
+            className="px-4 py-2 bg-white border border-gray-300 rounded-lg text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#61338A] focus:border-[#61338A]"
           />
           
           <select
@@ -210,7 +210,7 @@ const Blogs = () => {
               setFilterStatus(e.target.value);
               setCurrentPage(1);
             }}
-            className="px-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-[#61338A]"
+            className="px-4 py-2 bg-white border border-gray-300 rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#61338A] focus:border-[#61338A]"
           >
             <option value="all">All Status</option>
             <option value="published">Published</option>
@@ -220,7 +220,7 @@ const Blogs = () => {
           <select
             value={sortOrder}
             onChange={(e) => setSortOrder(e.target.value)}
-            className="px-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-[#61338A]"
+            className="px-4 py-2 bg-white border border-gray-300 rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#61338A] focus:border-[#61338A]"
           >
             <option value="newest">Newest First</option>
             <option value="oldest">Oldest First</option>
@@ -228,7 +228,7 @@ const Blogs = () => {
 
           <button
             onClick={handleCreate}
-            className="px-4 py-2 bg-[#38c559] hover:bg-[#7a4ba3] text-white rounded-lg transition-colors font-medium"
+            className="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors font-medium"
           >
             + New Blog
           </button>
@@ -272,22 +272,22 @@ const Blogs = () => {
 
       {/* Blogs Table */}
       {filteredBlogs.length === 0 ? (
-        <div className="bg-white/10 backdrop-blur-lg rounded-xl shadow-lg p-8 border border-white/20 text-center">
-          <p className="text-gray-400 text-lg">No blogs found</p>
+        <div className="bg-white rounded-xl shadow-md p-8 border border-gray-200 text-center">
+          <p className="text-gray-600 text-lg">No blogs found</p>
         </div>
       ) : (
         <>
-          <div className="bg-white/10 backdrop-blur-lg rounded-xl shadow-lg border border-white/20 overflow-hidden">
+          <div className="bg-white rounded-xl shadow-md border border-gray-200 overflow-hidden">
             <div className="overflow-x-auto">
               <table className="w-full">
-                <thead className="bg-[#61338A]/30">
+                <thead className="bg-[#61338A]">
                   <tr>
                     <th className="px-6 py-3 text-left">
                       <input
                         type="checkbox"
                         checked={selectedBlogs.length === filteredBlogs.length && filteredBlogs.length > 0}
                         onChange={toggleSelectAll}
-                        className="w-4 h-4 text-[#61338A] bg-white/10 border-white/20 rounded focus:ring-[#61338A]"
+                        className="w-4 h-4 text-[#61338A] bg-white border-gray-300 rounded focus:ring-[#61338A]"
                       />
                     </th>
                     <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Featured Image</th>
@@ -298,15 +298,15 @@ const Blogs = () => {
                     <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Actions</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-white/10">
+                <tbody className="divide-y divide-gray-200">
                   {paginatedBlogs.map((blog) => (
-                    <tr key={blog.id} className="hover:bg-white/5 transition-colors">
+                    <tr key={blog.id} className="hover:bg-gray-50 transition-colors">
                       <td className="px-6 py-4">
                         <input
                           type="checkbox"
                           checked={selectedBlogs.includes(blog.id)}
                           onChange={() => toggleSelectBlog(blog.id)}
-                          className="w-4 h-4 text-[#61338A] bg-white/10 border-white/20 rounded focus:ring-[#61338A]"
+                          className="w-4 h-4 text-[#61338A] bg-white border-gray-300 rounded focus:ring-[#61338A]"
                         />
                       </td>
                       <td className="px-6 py-4">
@@ -317,35 +317,35 @@ const Blogs = () => {
                             className="w-16 h-16 object-cover rounded"
                           />
                         ) : (
-                          <div className="w-16 h-16 bg-gray-600 rounded flex items-center justify-center">
+                          <div className="w-16 h-16 bg-gray-200 rounded flex items-center justify-center">
                             <span className="text-gray-400 text-xs">No Image</span>
                           </div>
                         )}
                       </td>
                       <td className="px-6 py-4">
-                        <div className="text-sm font-medium text-white">{blog.title}</div>
+                        <div className="text-sm font-medium text-gray-900">{blog.title}</div>
                         {blog.isFeatured && (
-                          <span className="text-xs bg-yellow-500/20 text-yellow-400 px-2 py-1 rounded mt-1 inline-block">
+                          <span className="text-xs bg-yellow-100 text-yellow-700 px-2 py-1 rounded mt-1 inline-block">
                             Featured
                           </span>
                         )}
                       </td>
                       <td className="px-6 py-4">
-                        <span className="text-sm text-gray-300">{blog.category}</span>
+                        <span className="text-sm text-gray-700">{blog.category}</span>
                       </td>
                       <td className="px-6 py-4">
                         {blog.status === 'PUBLISHED' ? (
-                          <span className="px-2 py-1 text-xs font-semibold rounded-full bg-green-500/20 text-green-400">
+                          <span className="px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-700">
                             Published
                           </span>
                         ) : (
-                          <span className="px-2 py-1 text-xs font-semibold rounded-full bg-gray-500/20 text-gray-400">
+                          <span className="px-2 py-1 text-xs font-semibold rounded-full bg-gray-100 text-gray-700">
                             Draft
                           </span>
                         )}
                       </td>
                       <td className="px-6 py-4">
-                        <div className="text-sm text-gray-300">
+                        <div className="text-sm text-gray-700">
                           {formatDate(blog.createdAt)}
                         </div>
                       </td>
@@ -353,13 +353,13 @@ const Blogs = () => {
                         <div className="flex gap-2">
                           <button
                             onClick={() => handleEdit(blog.id)}
-                            className="text-[#B886E8] hover:text-[#E8D5FF] transition-colors"
+                            className="text-[#61338A] hover:text-[#7a4ba3] transition-colors"
                           >
                             Edit
                           </button>
                           <button
                             onClick={() => handleDelete(blog.id)}
-                            className="text-red-400 hover:text-red-300 transition-colors"
+                            className="text-red-600 hover:text-red-700 transition-colors"
                           >
                             Delete
                           </button>
@@ -374,15 +374,15 @@ const Blogs = () => {
 
           {/* Pagination */}
           {totalPages > 1 && (
-            <div className="flex items-center justify-between bg-white/10 backdrop-blur-lg rounded-xl shadow-lg p-4 border border-white/20">
-              <div className="text-gray-300 text-sm">
+            <div className="flex items-center justify-between bg-white rounded-xl shadow-md p-4 border border-gray-200">
+              <div className="text-gray-600 text-sm">
                 Showing {startIndex + 1} to {Math.min(startIndex + itemsPerPage, filteredBlogs.length)} of {filteredBlogs.length} blogs
               </div>
               <div className="flex gap-2">
                 <button
                   onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
                   disabled={currentPage === 1}
-                  className="px-3 py-1 bg-white/10 hover:bg-white/20 disabled:opacity-50 disabled:cursor-not-allowed text-white rounded transition-colors"
+                  className="px-3 py-1 bg-gray-100 hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed text-gray-700 rounded transition-colors"
                 >
                   Previous
                 </button>
@@ -393,7 +393,7 @@ const Blogs = () => {
                     className={`px-3 py-1 rounded transition-colors ${
                       currentPage === i + 1
                         ? 'bg-[#61338A] text-white'
-                        : 'bg-white/10 hover:bg-white/20 text-white'
+                        : 'bg-gray-100 hover:bg-gray-200 text-gray-700'
                     }`}
                   >
                     {i + 1}
@@ -402,7 +402,7 @@ const Blogs = () => {
                 <button
                   onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
                   disabled={currentPage === totalPages}
-                  className="px-3 py-1 bg-white/10 hover:bg-white/20 disabled:opacity-50 disabled:cursor-not-allowed text-white rounded transition-colors"
+                  className="px-3 py-1 bg-gray-100 hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed text-gray-700 rounded transition-colors"
                 >
                   Next
                 </button>
