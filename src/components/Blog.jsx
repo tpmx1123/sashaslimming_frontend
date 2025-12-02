@@ -1,148 +1,100 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { publicBlogService } from '../services/publicBlogService';
+import { newsletterService } from '../services/newsletterService';
+import toast, { Toaster } from 'react-hot-toast';
 
-const blog = () => {
+const Blog = () => {
   const [activeCategory, setActiveCategory] = useState('All Articles');
   const [searchQuery, setSearchQuery] = useState('');
+  const [blogPosts, setBlogPosts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
+  const [newsletterEmail, setNewsletterEmail] = useState('');
+  const [newsletterSubmitting, setNewsletterSubmitting] = useState(false);
+  const [newsletterError, setNewsletterError] = useState('');
 
-  const blogPosts = [
-    // Weight Loss (3 posts)
-    {
-      id: 1,
-      title: '10 Science-Backed Weight Loss Tips That Actually Work',
-      excerpt: 'Discover the most effective, research-proven strategies for sustainable weight loss and better health.',
-      date: 'November 28, 2025',
-      category: 'Weight Loss',
-      image: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-      slug: 'science-backed-weight-loss-tips',
-      readTime: '6 min read'
-    },
-    {
-      id: 2,
-      title: 'The Truth About Intermittent Fasting for Weight Loss',
-      excerpt: 'Learn how intermittent fasting can help with weight management and what science says about its effectiveness.',
-      date: 'November 25, 2025',
-      category: 'Weight Loss',
-      image: 'https://images.unsplash.com/photo-1545205597-3d9d02c29597?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-      slug: 'intermittent-fasting-weight-loss',
-      readTime: '7 min read'
-    },
-    {
-      id: 3,
-      title: '5 Common Weight Loss Mistakes You Might Be Making',
-      excerpt: 'Avoid these common pitfalls that could be preventing you from reaching your weight loss goals.',
-      date: 'November 22, 2025',
-      category: 'Weight Loss',
-      image: 'https://images.unsplash.com/photo-1498837167922-ddd27525d352?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-      slug: 'common-weight-loss-mistakes',
-      readTime: '5 min read'
-    },
-    
-    // Nutrition (3 posts)
-    {
-      id: 4,
-      title: 'The Ultimate Guide to Macro Counting for Beginners',
-      excerpt: 'Learn how to track macros effectively to achieve your fitness and weight management goals.',
-      date: 'November 27, 2025',
-      category: 'Nutrition',
-      image: 'https://images.unsplash.com/photo-1490645935967-10de6ba17061?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-      slug: 'macro-counting-beginners-guide',
-      readTime: '8 min read'
-    },
-    {
-      id: 5,
-      title: 'Superfoods You Should Be Eating for Better Health',
-      excerpt: 'Discover the most nutrient-dense foods to incorporate into your diet for optimal health and wellness.',
-      date: 'November 24, 2025',
-      category: 'Nutrition',
-      image: 'https://images.unsplash.com/photo-1490644658840-3f2a3be8b4c6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-      slug: 'superfoods-for-better-health',
-      readTime: '6 min read'
-    },
-    {
-      id: 6,
-      title: 'Meal Prepping 101: A Beginner\'s Guide',
-      excerpt: 'Everything you need to know to start meal prepping like a pro and stay on track with your nutrition goals.',
-      date: 'November 20, 2025',
-      category: 'Nutrition',
-      image: 'https://images.unsplash.com/photo-1542834367427-4b5e0a0f4b8d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-      slug: 'meal-prepping-beginners-guide',
-      readTime: '7 min read'
-    },
+  useEffect(() => {
+    fetchBlogs();
+  }, []);
 
-    // Workout (3 posts)
-    {
-      id: 7,
-      title: 'The Best At-Home Workouts for Busy People',
-      excerpt: 'Effective workouts you can do anywhere, anytime - no equipment needed!',
-      date: 'November 26, 2025',
-      category: 'Workout',
-      image: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-      slug: 'best-at-home-workouts',
-      readTime: '6 min read'
-    },
-    {
-      id: 8,
-      title: 'Strength Training for Beginners: A Complete Guide',
-      excerpt: 'Learn the fundamentals of strength training and how to get started on your fitness journey.',
-      date: 'November 23, 2025',
-      category: 'Workout',
-      image: 'https://images.unsplash.com/photo-1571019614242-c6e2f4fcc8ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-      slug: 'strength-training-beginners-guide',
-      readTime: '8 min read'
-    },
-    {
-      id: 9,
-      title: 'The Benefits of High-Intensity Interval Training (HIIT)',
-      excerpt: 'Discover why HIIT workouts are so effective for fat loss and overall fitness.',
-      date: 'November 19, 2025',
-      category: 'Workout',
-      image: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-      slug: 'benefits-of-hiit',
-      readTime: '5 min read'
-    },
-
-    // Success Stories (3 posts)
-    {
-      id: 10,
-      title: 'Sarah\'s 50-Pound Weight Loss Journey',
-      excerpt: 'How Sarah transformed her life with healthy eating and regular exercise.',
-      date: 'November 25, 2025',
-      category: 'Success Stories',
-      image: 'https://images.unsplash.com/photo-1551969014-7d2c4cddf0b6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-      slug: 'sarah-weight-loss-journey',
-      readTime: '10 min read'
-    },
-    {
-      id: 11,
-      title: 'John\'s Transformation: From Couch to 5K',
-      excerpt: 'How John went from being sedentary to running his first 5K race in just 3 months.',
-      date: 'November 21, 2025',
-      category: 'Success Stories',
-      image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-      slug: 'john-couch-to-5k',
-      readTime: '8 min read'
-    },
-    {
-      id: 12,
-      title: 'Lisa\'s Journey to a Healthier Lifestyle',
-      excerpt: 'How Lisa made sustainable lifestyle changes that led to lasting results.',
-      date: 'November 18, 2025',
-      category: 'Success Stories',
-      image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-      slug: 'lisa-healthier-lifestyle',
-      readTime: '9 min read'
+  const fetchBlogs = async () => {
+    try {
+      setLoading(true);
+      setError('');
+      const result = await publicBlogService.getAllBlogs();
+      
+      if (result.success) {
+        setBlogPosts(result.data || []);
+      } else {
+        setError(result.message || 'Failed to load blogs');
+      }
+    } catch (err) {
+      setError('Failed to load blogs');
+    } finally {
+      setLoading(false);
     }
-  ];
+  };
 
-  const categories = ['All Articles', 'Weight Loss', 'Nutrition', 'Workout', 'Success Stories'];
+  const formatDate = (dateString) => {
+    if (!dateString) return '';
+    try {
+      return new Date(dateString).toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+      });
+    } catch {
+      return dateString;
+    }
+  };
+
+  const handleNewsletterSubmit = async (e) => {
+    e.preventDefault();
+    setNewsletterError('');
+    setNewsletterSubmitting(true);
+
+    try {
+      const result = await newsletterService.subscribe(newsletterEmail);
+      
+      if (result.success) {
+        toast.success(result.message || 'Successfully subscribed to newsletter!');
+        setNewsletterEmail('');
+      } else {
+        setNewsletterError(result.message || 'Failed to subscribe. Please try again.');
+        toast.error(result.message || 'Failed to subscribe');
+      }
+    } catch (err) {
+      const errorMsg = 'Network error. Please check your connection and try again.';
+      setNewsletterError(errorMsg);
+      toast.error(errorMsg);
+    } finally {
+      setNewsletterSubmitting(false);
+    }
+  };
+
+  // Get unique categories from blogs
+  const categories = ['All Articles', ...new Set(blogPosts.map(post => post.category).filter(Boolean))];
 
   const filteredPosts = blogPosts.filter(post => {
     const matchesCategory = activeCategory === 'All Articles' || post.category === activeCategory;
-    const matchesSearch = post.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
-                         post.excerpt.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesSearch = 
+      post.title?.toLowerCase().includes(searchQuery.toLowerCase()) || 
+      post.excerpt?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      post.category?.toLowerCase().includes(searchQuery.toLowerCase());
     return matchesCategory && matchesSearch;
   });
+
+  if (loading) {
+    return (
+      <div className="bg-gray-50 min-h-screen mt-20 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#61338A] mx-auto mb-4"></div>
+          <p className="text-gray-600">Loading blogs...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="bg-gray-50 min-h-screen mt-20">
@@ -193,6 +145,12 @@ const blog = () => {
           ))}
         </div>
 
+        {error && (
+          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-6 text-center">
+            {error}
+          </div>
+        )}
+
         {/* Blog Posts Grid */}
         {filteredPosts.length > 0 ? (
           <>
@@ -201,26 +159,30 @@ const blog = () => {
                 <div key={post.id} className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300">
                   <div className="h-60 overflow-hidden">
                     <img 
-                      src={post.image} 
+                      src={post.image || 'https://via.placeholder.com/800x600?text=No+Image'} 
                       alt={post.title}
                       className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-500"
+                      onError={(e) => {
+                        e.target.src = 'https://via.placeholder.com/800x600?text=No+Image';
+                      }}
                     />
                   </div>
                   <div className="p-6">
-                    <div className="flex items-center justify-between mb-3">
+                    <div className="mb-3">
                       <span className="px-3 py-1 bg-sasha-purple-light text-sasha-purple-deeper text-xs font-medium rounded-full">
-                        {post.category}
+                        {post.category || 'Uncategorized'}
                       </span>
-                      <span className="text-sm text-gray-500">{post.readTime}</span>
                     </div>
                     <h2 className="text-xl font-bold text-gray-900 mb-2 hover:text-sasha-purple-deeper transition-colors">
-                      <Link to={`/blog/${post.slug}`}>{post.title}</Link>
+                      <Link to={`/blog/${post.slug || post.id}`}>{post.title}</Link>
                     </h2>
                     <p className="text-gray-600 mb-4 line-clamp-2">{post.excerpt}</p>
                     <div className="flex items-center justify-between mt-4">
-                      <span className="text-sm text-gray-500">{post.date}</span>
+                      <span className="text-sm text-gray-500">
+                        {formatDate(post.createdAt)}
+                      </span>
                       <Link 
-                        to={`/blog/${post.slug}`}
+                        to={`/blog/${post.slug || post.id}`}
                         className="text-sasha-purple-deeper hover:text-sasha-purple-dark font-medium text-sm flex items-center"
                       >
                         Read More
@@ -233,17 +195,14 @@ const blog = () => {
                 </div>
               ))}
             </div>
-
-            {/* Load More Button */}
-            <div className="text-center mt-12">
-              <button className="px-6 py-3 border-2 border-sasha-purple-deeper text-sasha-purple-deeper hover:bg-sasha-purple-deeper hover:text-white font-medium rounded-lg transition-colors duration-300">
-                Load More Articles
-              </button>
-            </div>
           </>
         ) : (
           <div className="text-center py-12">
-            <p className="text-gray-500">No articles found matching your search.</p>
+            <p className="text-gray-500 text-lg">
+              {blogPosts.length === 0 
+                ? 'No blog posts available yet. Check back soon!' 
+                : 'No articles found matching your search.'}
+            </p>
           </div>
         )}
       </div>
@@ -255,20 +214,61 @@ const blog = () => {
           <p className="text-white/80 mb-8 max-w-2xl mx-auto">
             Subscribe to our newsletter and never miss our latest articles, tips, and success stories.
           </p>
-          <div className="max-w-md mx-auto flex">
+          <form 
+            onSubmit={handleNewsletterSubmit}
+            className="max-w-md mx-auto flex flex-col sm:flex-row gap-2"
+          >
             <input 
               type="email" 
               placeholder="Enter your email" 
-              className="flex-grow px-5 py-3 rounded-l-lg focus:outline-none text-gray-900"
+              value={newsletterEmail}
+              onChange={(e) => {
+                setNewsletterEmail(e.target.value);
+                setNewsletterError('');
+              }}
+              required
+              className={`flex-grow px-5 py-3 rounded-lg sm:rounded-l-lg sm:rounded-r-none focus:outline-none text-gray-900 ${
+                newsletterError ? 'border-2 border-red-500' : ''
+              }`}
+              disabled={newsletterSubmitting}
             />
-            <button className="bg-sasha-pink hover:bg-pink-600 text-white font-medium px-6 py-3 rounded-r-lg transition-colors">
-              Subscribe
+            <button 
+              type="submit"
+              disabled={newsletterSubmitting}
+              className="bg-sasha-pink bg-pink-600 disabled:bg-pink-400 disabled:cursor-not-allowed text-white font-medium px-6 py-3 rounded-lg sm:rounded-r-lg sm:rounded-l-none transition-colors whitespace-nowrap"
+            >
+              {newsletterSubmitting ? 'Subscribing...' : 'Subscribe'}
             </button>
-          </div>
+          </form>
+          {newsletterError && (
+            <p className="text-red-300 text-sm mt-2">{newsletterError}</p>
+          )}
         </div>
       </div>
+      <Toaster 
+        position="top-right"
+        toastOptions={{
+          duration: 4000,
+          success: {
+            style: {
+              background: '#4BB543',
+              color: 'white',
+              padding: '16px',
+              borderRadius: '8px',
+            },
+          },
+          error: {
+            style: {
+              background: '#FF3333',
+              color: 'white',
+              padding: '16px',
+              borderRadius: '8px',
+            },
+          },
+        }}
+      />
     </div>
   );
 };
 
-export default blog;
+export default Blog;

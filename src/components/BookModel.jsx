@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import toast, { Toaster } from 'react-hot-toast'
+import { bookingService } from '../services/bookingService'
 
 // Toast configuration
 const showSuccessToast = (message) => {
@@ -162,10 +163,23 @@ const BookModel = ({ isOpen, onClose }) => {
     setIsSubmitting(true)
 
     try {
-      await new Promise((res) => setTimeout(res, 1000))
+      // Prepare booking data for backend
+      const bookingData = {
+        name: formData.name.trim(),
+        email: formData.email.trim(),
+        phone: formData.phone.trim(),
+        serviceName: formData.service, // Backend expects serviceName
+        date: formData.date,
+        time: formData.time,
+        message: formData.message.trim() || null // Optional field
+      }
 
+      // Submit to backend
+      const result = await bookingService.createBooking(bookingData)
+
+      if (result.success) {
       // Show success toast
-      showSuccessToast('Your appointment request has been submitted!');
+        showSuccessToast('Your appointment request has been submitted successfully!');
       
       // Clear form data after toast is shown
       setFormData({
@@ -178,12 +192,18 @@ const BookModel = ({ isOpen, onClose }) => {
         message: ''
       });
       setCharCount(0);
+        setEmailError('');
+        setPhoneError('');
       
       // Close the form after a short delay to ensure toast is visible
       setTimeout(() => onClose(), 2000);
+      } else {
+        // Show error toast with backend error message
+        showErrorToast(result.message || 'Error submitting form. Please try again.');
+      }
     } catch (err) {
       console.error('Form submission error:', err)
-      showErrorToast('Error submitting form. Please try again.');
+      showErrorToast('Network error. Please check your connection and try again.');
     } finally {
       setIsSubmitting(false)
     }

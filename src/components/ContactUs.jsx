@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import toast, { Toaster } from 'react-hot-toast'
+import { contactService } from '../services/contactService'
 
 const bannerImage =
   'https://res.cloudinary.com/di4caiech/image/upload/v1764238157/contact_slim_nj7mks.jpg'
@@ -163,28 +164,11 @@ const ContactUs = () => {
     setIsSubmitting(true)
 
     try {
-      const formDataToSend = new FormData()
-      formDataToSend.append('name', formData.name)
-      formDataToSend.append('email', formData.email)
-      formDataToSend.append('phone', formData.phone)
-      formDataToSend.append('subject', formData.subject)
-      formDataToSend.append('message', formData.message || '(No message provided)')
+      const result = await contactService.submitContactForm(formData)
 
-      // FormSubmit.co configuration
-      formDataToSend.append('_subject', 'New Contact Form Submission from Sasha Clinics')
-      formDataToSend.append('_captcha', 'false')
-      formDataToSend.append('_next', window.location.origin + '/contact-us?success=true')
-      formDataToSend.append('_template', 'table')
-      formDataToSend.append('_format', 'plain')
-
-      const response = await fetch('https://formsubmit.co/ajax/bhanu.rupa2003@gmail.com', {
-        method: 'POST',
-        body: formDataToSend,
-      })
-
-      if (response.ok) {
+      if (result.success) {
         // Show success toast
-        toast.success('Your message has been sent successfully!', {
+        toast.success(result.message || 'Your message has been sent successfully!', {
           style: {
             background: '#4BB543',
             color: 'white',
@@ -200,17 +184,36 @@ const ContactUs = () => {
           subject: '',
           message: '',
         })
+        setCharCount(0)
+        setErrors({
+          email: '',
+          phone: '',
+          message: ''
+        })
         setShowSuccess(true)
         setIsSubmitting(false)
 
         // Scroll to success message
         window.scrollTo({ top: 0, behavior: 'smooth' })
       } else {
-        throw new Error('Form submission failed')
+        toast.error(result.message || 'Failed to send message. Please try again.', {
+          style: {
+            background: '#FF3333',
+            color: 'white',
+            marginTop: '70px'
+          }
+        })
+        setIsSubmitting(false)
       }
     } catch (error) {
       console.error('Error submitting form:', error)
-      alert('There was an error sending your message. Please try again or contact us directly.')
+      toast.error('There was an error sending your message. Please try again or contact us directly.', {
+        style: {
+          background: '#FF3333',
+          color: 'white',
+          marginTop: '70px'
+        }
+      })
       setIsSubmitting(false)
     }
   }
@@ -230,8 +233,7 @@ const ContactUs = () => {
       title: 'Phone',
       subtitle: 'Call us anytime',
       details: [
-        { value: '+91 9234569999', link: 'tel:+919234569999' },
-        { value: '+91 9063960993', link: 'tel:+919063960993' },
+        { value: '+91 9234569999', link: 'tel:+919234569999' }
       ],
       gradient: 'from-blue-300 to-blue-400',
     },
@@ -272,8 +274,8 @@ const ContactUs = () => {
       subtitle: 'Visit our clinic',
       details: [
         {
-          value: 'Sasha Clinics, Premium Location',
-          link: 'https://www.google.com/maps/search/?api=1&query=Sasha+Clinics',
+          value: 'Sasha Luxe Slimming -Madhapur',
+          link: 'https://maps.app.goo.gl/kpJQHRo74kgwtvDi9',
         },
       ],
       gradient: 'from-emerald-300 to-teal-400',
@@ -639,7 +641,7 @@ const ContactUs = () => {
                 </p>
                 <div className="flex flex-wrap gap-4">
                   <a
-                    href="https://www.instagram.com/sashaclinics"
+                    href="https://www.instagram.com/sashaluxeslimming?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
                     target="_blank"
                     rel="noopener noreferrer"
                     className="group flex items-center justify-center w-14 h-14 rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 text-white hover:scale-110 transition-all duration-300 shadow-lg hover:shadow-xl"
@@ -675,13 +677,10 @@ const ContactUs = () => {
                 <h3 className="text-2xl font-bold mb-4">Business Hours</h3>
                 <div className="space-y-3">
                   <div className="flex justify-between items-center">
-                    <span className="text-[#392D44]/80">Monday - Friday</span>
-                    <span className="font-semibold text-[#392D44]">9:00 AM - 7:00 PM</span>
+                    <span className="text-[#392D44]/80">Monday - Saturday</span>
+                    <span className="font-semibold text-[#392D44]">9:00 AM - 9:00 PM</span>
                   </div>
-                  <div className="flex justify-between items-center">
-                    <span className="text-[#392D44]/80">Saturday</span>
-                    <span className="font-semibold text-[#392D44]">10:00 AM - 6:00 PM</span>
-                  </div>
+                  
                   <div className="flex justify-between items-center">
                     <span className="text-[#392D44]/80">Sunday</span>
                     <span className="font-semibold text-[#392D44]">Closed</span>
@@ -692,6 +691,32 @@ const ContactUs = () => {
           </motion.div>
         </div>
       </div>
+
+      {/* Toast Notifications */}
+      <Toaster 
+        position="top-right"
+        toastOptions={{
+          duration: 4000,
+          style: {
+            background: '#363636',
+            color: '#fff',
+          },
+          success: {
+            duration: 3000,
+            iconTheme: {
+              primary: '#4ade80',
+              secondary: '#fff',
+            },
+          },
+          error: {
+            duration: 4000,
+            iconTheme: {
+              primary: '#ef4444',
+              secondary: '#fff',
+            },
+          },
+        }}
+      />
     </motion.div>
   )
 }

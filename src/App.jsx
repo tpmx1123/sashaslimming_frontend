@@ -18,6 +18,13 @@ import MuscleBuildingToning from './components/muscle-building&toning/MuscleHero
 import ErrorPage from './components/ErrorPage'
 import ContactUs from './components/ContactUs'   
 import Blog from './components/Blog'
+import BlogDetail from './components/BlogDetail'
+import AdminLogin from './components/AdminLogin'
+import AdminPanel from './components/AdminPanel'
+import BlogFormWrapper from './components/admin/BlogFormWrapper'
+import ProtectedRoute from './components/ProtectedRoute'
+import PrivacyPolicy from './components/PrivacyPolicy'
+import TermsAndConditions from './components/TermsAndConditions'
 
 function AppContent() {
   const location = useLocation()
@@ -30,15 +37,25 @@ function AppContent() {
     '/surgical-body-sculpting',
     '/muscle-building-toning',
     '/contact-us',
-    '/blog'   
+    '/blog',
+    '/admin-login',
+    '/admin-panel'
   ]
 
-  const isErrorPage = !validRoutes.includes(location.pathname)
+  const isErrorPage = !validRoutes.includes(location.pathname) && 
+                      !location.pathname.startsWith('/admin') &&
+                      !location.pathname.startsWith('/admin/blog') &&
+                      !location.pathname.startsWith('/blog/')
+
+  // Hide navbar and footer for admin routes
+  const isAdminRoute = location.pathname.startsWith('/admin-panel') || 
+                       location.pathname.startsWith('/admin-login') ||
+                       location.pathname.startsWith('/admin/blog')
 
   return (
     <div className="App">
       <ScrollToTop />
-      {!isErrorPage && <Navbar />}
+      {!isErrorPage && !isAdminRoute && <Navbar />}
 
       <Routes>
 
@@ -103,7 +120,32 @@ function AppContent() {
             <Footer />
           </>
         } />
-        <Route path="/blog" element={<><Navbar /><Blog /><Footer /></>} />
+        <Route path="/blog" element={<><Blog /></>} />
+        <Route path="/blog/:slug" element={<><BlogDetail /></>} />
+        <Route path="/privacy-policy" element={<> <Navbar /> <PrivacyPolicy /></>} />
+        <Route path="/terms-conditions" element={<> <Navbar /> <TermsAndConditions /></>} />
+        {/* Admin Routes - Secret Login Page */}
+        <Route path="/admin-login" element={<AdminLogin />} />
+        
+        {/* Protected Admin Panel */}
+        <Route path="/admin-panel" element={
+          <ProtectedRoute>
+            <AdminPanel />
+          </ProtectedRoute>
+        } />
+
+        {/* Blog Form Routes */}
+        <Route path="/admin/blog/new" element={
+          <ProtectedRoute>
+            <BlogFormWrapper />
+          </ProtectedRoute>
+        } />
+        
+        <Route path="/admin/blog/edit/:id" element={
+          <ProtectedRoute>
+            <BlogFormWrapper />
+          </ProtectedRoute>
+        } />
 
         <Route path="*" element={<ErrorPage />} />
       </Routes>
