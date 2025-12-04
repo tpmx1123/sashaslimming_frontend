@@ -48,21 +48,21 @@ const WhatIsFR = () => {
   ];
 
   return (
-    <div className="w-full bg-white py-12 md:py-16 lg:py-20 px-4 sm:px-6 md:px-8 lg:px-8">
+    <div className="w-full bg-white py-12 md:py-16 lg:py-20 px-4 sm:px-6 md:px-8 lg:px-8 overflow-x-hidden">
       <div className="max-w-5xl mx-auto">
         {/* Section 1: What Is Fat Reduction? */}
         <motion.div 
           className="mb-8 md:mb-6 lg:mb-5"
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
+          viewport={{ once: true, amount: 0.1 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
         >
           <motion.h2 
             className="font-montserra text-xl md:text-2xl lg:text-4xl font-bold text-[#61338A] text-center mb-4 md:mb-6 lg:mb-8"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, amount: 0.1 }}
             transition={{ duration: 0.5, delay: 0.1 }}
           >
             What Is Fat Reduction?
@@ -72,7 +72,7 @@ const WhatIsFR = () => {
             className="space-y-3 md:space-y-4 lg:space-y-5"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, amount: 0.1 }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
             <p className=" font-poppins text-base md:text-lg lg:text-xl text-gray-700 leading-loose text-left" style={{ lineHeight:'1.6'}}>
@@ -89,14 +89,14 @@ your body and goals.
           className="mb-2 md:mb-3 lg:mb-4"
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
+          viewport={{ once: true, amount: 0.1 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
         >
           <motion.h2 
             className="font-montserra text-xl md:text-2xl lg:text-4xl font-bold text-[#61338A] text-center mb-4 md:mb-6 lg:mb-8"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, amount: 0.1 }}
             transition={{ duration: 0.5, delay: 0.1 }}
           >
             How It Works
@@ -106,7 +106,7 @@ your body and goals.
             className="space-y-3 md:space-y-4 lg:space-y-5 mb-6 md:mb-8 lg:mb-12"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, amount: 0.1 }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
             <p className="font-poppins text-base md:text-lg lg:text-xl text-gray-600 leading-relaxed text-left" style={{ lineHeight:'1.6'}}>
@@ -121,7 +121,7 @@ treatment may include:
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 max-w-7xl mx-auto"
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
+            viewport={{ once: true, amount: 0.1 }}
             variants={{
               hidden: { opacity: 0 },
               visible: {

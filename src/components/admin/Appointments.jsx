@@ -25,7 +25,12 @@ const Appointments = () => {
       }
 
       if (result.success) {
-        setBookings(result.data || []);
+        let bookingsData = result.data || [];
+        // Filter for read-only if needed
+        if (filterStatus === 'read') {
+          bookingsData = bookingsData.filter(booking => booking.isRead === true);
+        }
+        setBookings(bookingsData);
       } else {
         setError(result.message);
       }
@@ -182,12 +187,22 @@ const Appointments = () => {
                       )}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                      <button
-                        onClick={() => handleDelete(booking.id)}
-                        className="text-red-400 hover:text-red-300 transition-colors font-medium"
-                      >
-                        Delete
-                      </button>
+                      <div className="flex items-center gap-3">
+                        {!booking.isRead && (
+                          <button
+                            onClick={() => handleMarkAsRead(booking.id)}
+                            className="px-3 py-1.5 bg-green-500 hover:bg-green-600 text-white rounded-lg transition-colors font-medium text-xs"
+                          >
+                            Mark as Read
+                          </button>
+                        )}
+                        <button
+                          onClick={() => handleDelete(booking.id)}
+                          className="px-3 py-1.5 bg-red-500 hover:bg-red-600 text-white rounded-lg transition-colors font-medium text-xs"
+                        >
+                          Delete
+                        </button>
+                      </div>
                     </td>
                   </tr>
                 ))}

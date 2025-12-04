@@ -1,4 +1,4 @@
-const API_BASE_URL = 'http://localhost:8081/api';
+import API_BASE_URL from '../config/apiConfig';
 
 export const authService = {
   login: async (username, password) => {
@@ -51,7 +51,7 @@ export const authService = {
       }
     } catch (error) {
       console.error('Login error:', error);
-      return { success: false, message: 'Network error. Please check if the backend is running on http://localhost:8081' };
+      return { success: false, message: 'Network error. Please check your connection and try again.' };
     }
   },
 

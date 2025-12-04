@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { publicBlogService } from '../services/publicBlogService';
 import { newsletterService } from '../services/newsletterService';
+import { getBlogSlug } from '../utils/slugUtils';
 import toast, { Toaster } from 'react-hot-toast';
 
 const Blog = () => {
@@ -174,7 +175,7 @@ const Blog = () => {
                       </span>
                     </div>
                     <h2 className="text-xl font-bold text-gray-900 mb-2 hover:text-sasha-purple-deeper transition-colors">
-                      <Link to={`/blog/${post.slug || post.id}`}>{post.title}</Link>
+                      <Link to={`/blog/${getBlogSlug(post)}`}>{post.title}</Link>
                     </h2>
                     <p className="text-gray-600 mb-4 line-clamp-2">{post.excerpt}</p>
                     <div className="flex items-center justify-between mt-4">
@@ -182,7 +183,7 @@ const Blog = () => {
                         {formatDate(post.createdAt)}
                       </span>
                       <Link 
-                        to={`/blog/${post.slug || post.id}`}
+                        to={`/blog/${getBlogSlug(post)}`}
                         className="text-sasha-purple-deeper hover:text-sasha-purple-dark font-medium text-sm flex items-center"
                       >
                         Read More

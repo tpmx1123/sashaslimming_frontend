@@ -1,4 +1,4 @@
-const API_BASE_URL = 'http://localhost:8081/api';
+import API_BASE_URL from '../config/apiConfig';
 
 export const blogService = {
   getAllBlogs: async () => {
@@ -145,7 +145,7 @@ export const blogService = {
         if (!response.ok && response.status === 0) {
           return { 
             success: false, 
-            message: 'Cannot connect to server. Please make sure the backend is running on port 8081.' 
+            message: 'Cannot connect to server. Please check your connection and try again.' 
           };
         }
         const error = await response.json().catch(() => ({ error: 'Failed to upload image' }));

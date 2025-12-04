@@ -1,31 +1,52 @@
-import React from 'react'
+import React, { Suspense, lazy } from 'react'
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom'
 import ScrollToTop from './components/ScrollToTop';
 import Navbar from './components/Navbar'
-import Home from './components/Home'
-import Core from './components/Core'
-import Journey from './components/Journey'
-import WhySasha from './components/WhySasha'
-import QuestionsFQ from './components/questionsfq'  
-import FAQ from './components/FAQ'
-import Footer from './components/Footer'
-import AdvancedSlimming from './components/advancedslimmming/AdvancedSlimming'
-import SkinTightening from './components/skin-tightening/SkinTightening'
-import InchLoss from './components/inch-loss.jsx/InchLoss' 
-import FatReduction from './components/fat-reduction/FatReduction'
-import SurgicalBodySculpting from './components/surgical-body-sculpting/surgical-body-sculpting'
-import MuscleBuildingToning from './components/muscle-building&toning/MuscleHero'
-import ErrorPage from './components/ErrorPage'
-import ContactUs from './components/ContactUs'   
-import Blog from './components/Blog'
-import BlogDetail from './components/BlogDetail'
-import AdminLogin from './components/AdminLogin'
-import AdminPanel from './components/AdminPanel'
-import BlogFormWrapper from './components/admin/BlogFormWrapper'
-import ProtectedRoute from './components/ProtectedRoute'
-import PrivacyPolicy from './components/PrivacyPolicy'
-import TermsAndConditions from './components/TermsAndConditions'
 import CookieBanner from './components/CookieBanner'
+import ProtectedRoute from './components/ProtectedRoute'
+
+// Lazy load components for better performance
+// Core components (loaded immediately - above the fold)
+const Home = lazy(() => import('./components/Home'))
+const Core = lazy(() => import('./components/Core'))
+const Journey = lazy(() => import('./components/Journey'))
+const WhySasha = lazy(() => import('./components/WhySasha'))
+const QuestionsFQ = lazy(() => import('./components/questionsfq'))
+const FAQ = lazy(() => import('./components/FAQ'))
+const Footer = lazy(() => import('./components/Footer'))
+
+// Service pages (lazy loaded)
+const AdvancedSlimming = lazy(() => import('./components/advancedslimmming/AdvancedSlimming'))
+const SkinTightening = lazy(() => import('./components/skin-tightening/SkinTightening'))
+const InchLoss = lazy(() => import('./components/inch-loss.jsx/InchLoss'))
+const FatReduction = lazy(() => import('./components/fat-reduction/FatReduction'))
+const SurgicalBodySculpting = lazy(() => import('./components/surgical-body-sculpting/surgical-body-sculpting'))
+const MuscleBuildingToning = lazy(() => import('./components/muscle-building&toning/MuscleHero'))
+
+// Blog and Contact (lazy loaded)
+const Blog = lazy(() => import('./components/Blog'))
+const BlogDetail = lazy(() => import('./components/BlogDetail'))
+const ContactUs = lazy(() => import('./components/ContactUs'))
+
+// Admin components (lazy loaded)
+const AdminLogin = lazy(() => import('./components/AdminLogin'))
+const AdminPanel = lazy(() => import('./components/AdminPanel'))
+const BlogFormWrapper = lazy(() => import('./components/admin/BlogFormWrapper'))
+
+// Legal pages (lazy loaded)
+const PrivacyPolicy = lazy(() => import('./components/PrivacyPolicy'))
+const TermsAndConditions = lazy(() => import('./components/TermsAndConditions'))
+const ErrorPage = lazy(() => import('./components/ErrorPage'))
+
+// Loading component
+const LoadingFallback = () => (
+  <div className="min-h-screen flex items-center justify-center bg-gray-50">
+    <div className="text-center">
+      <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-[#61338A]"></div>
+      <p className="mt-4 text-gray-600">Loading...</p>
+    </div>
+  </div>
+)
 
 function AppContent() {
   const location = useLocation()
@@ -58,8 +79,8 @@ function AppContent() {
       <ScrollToTop />
       {!isErrorPage && !isAdminRoute && <Navbar />}
 
+      <Suspense fallback={<LoadingFallback />}>
       <Routes>
-
         <Route path="/" element={
           <>
             <Home />
@@ -121,10 +142,24 @@ function AppContent() {
             <Footer />
           </>
         } />
+          
         <Route path="/blog" element={<><Blog /></>} />
         <Route path="/blog/:slug" element={<><BlogDetail /></>} />
-        <Route path="/privacy-policy" element={<> <Navbar /> <PrivacyPolicy /></>} />
-        <Route path="/terms-conditions" element={<> <Navbar /> <TermsAndConditions /></>} />
+          
+          <Route path="/privacy-policy" element={
+            <>
+              <Navbar />
+              <PrivacyPolicy />
+            </>
+          } />
+          
+          <Route path="/terms-conditions" element={
+            <>
+              <Navbar />
+              <TermsAndConditions />
+            </>
+          } />
+          
         {/* Admin Routes - Secret Login Page */}
         <Route path="/admin-login" element={<AdminLogin />} />
         
@@ -150,6 +185,7 @@ function AppContent() {
 
         <Route path="*" element={<ErrorPage />} />
       </Routes>
+      </Suspense>
       
       {/* Cookie Banner - Show on all pages except admin routes */}
       {!isAdminRoute && <CookieBanner />}

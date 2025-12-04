@@ -76,11 +76,15 @@ export default function BookYourAssessmentToday() {
             {/* Left Side - Text Content */}
             <div className="flex-1 ml-0 sm:ml-4 md:ml-8 lg:ml-14 -mt-0 sm:-mt-2 md:-mt-3 pr-2 sm:pr-4 md:pr-0">
               
-              <motion.p 
-                className="text-white mb-2 sm:mb-3 md:mb-4 lg:mb-4 text-[14px] sm:text-xl md:text-1xl lg:text-xl xl:text-1xl w-full sm:w-[250px] md:w-[350px] lg:w-[520px] font-poppins leading-tight sm:leading-snug md:leading-normal" 
-                style={{letterSpacing: '0.5px', lineHeight: '1.6'}}
-                variants={textVariants}
-              >
+            <motion.p
+  className="text-white mb-2 sm:mb-3 md:mb-4 lg:mb-4 
+             text-[12px] sm:text-base md:text-xl lg:text-xl xl:text-xl 
+             w-[230px] sm:w-[250px] md:w-[350px] lg:w-[520px] 
+             font-poppins leading-tight sm:leading-snug md:leading-normal"
+  style={{ letterSpacing: '0.5px', lineHeight: '1.6' }}
+  variants={textVariants}
+>
+
                 Reveal firmer, younger looking skin naturally
 and effortlessly. At Sasha Luxe, we provide
 the best skin tightening treatments designed
@@ -88,7 +92,7 @@ to rejuvenate, contour, and bring out your
 natural radiance.
               </motion.p>
               <motion.button 
-                className="bg-[#FCC17F] text-[#0267AC] font-bold rounded-xl sm:rounded-2xl hover:bg-gray-100 transition-all duration-300 shadow-lg text-[10px] sm:text-sm md:text-base lg:text-xl xl:text-[25px] px-3 py-2 sm:px-4 sm:py-2.5 md:px-6 md:py-3 lg:px-7 lg:py-[18px] whitespace-nowrap"
+                className="bg-[#E3B077] text-white font-bold rounded-xl sm:rounded-2xl hover:bg-[#E3B077] transition-all duration-300 shadow-lg text-[10px] sm:text-sm md:text-base lg:text-xl xl:text-[25px] px-3 py-2 sm:px-4 sm:py-2.5 md:px-6 md:py-3 lg:px-7 lg:py-[18px] whitespace-nowrap"
                 style={{letterSpacing: '0.5px'}}
                 variants={buttonVariants}
                 whileHover={{ scale: 1.05, boxShadow: "0 10px 25px rgba(0,0,0,0.2)" }}

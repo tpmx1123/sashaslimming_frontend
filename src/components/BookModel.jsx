@@ -105,9 +105,24 @@ const BookModel = ({ isOpen, onClose }) => {
     const cleaned = phone.replace(/[^\d+]/g, '')
     const digits = cleaned.replace(/\D/g, '')
 
-    if (!phone) return setPhoneError('Phone number is required'), false
-    if (digits.length < 10) return setPhoneError('Number is too short'), false
-    if (digits.length > 15) return setPhoneError('Number is too long'), false
+    if (!phone || !phone.trim()) {
+      setPhoneError('Phone number is required')
+      return false
+    }
+    if (digits.length < 10) {
+      setPhoneError('Phone number must be at least 10 digits')
+      return false
+    }
+    if (digits.length > 15) {
+      setPhoneError('Phone number cannot exceed 15 digits')
+      return false
+    }
+    // Check if phone contains invalid characters (only digits, spaces, +, -, (, ) allowed)
+    const phoneRegex = /^[\d\s+\-()]+$/
+    if (!phoneRegex.test(phone)) {
+      setPhoneError('Phone number can only contain digits and +, -, (, )')
+      return false
+    }
 
     setPhoneError('')
     return true
@@ -115,6 +130,24 @@ const BookModel = ({ isOpen, onClose }) => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    
+    // Handle phone number - only allow digits, spaces, +, -, (, )
+    if (name === 'phone') {
+      // Allow only valid phone characters
+      const phoneValue = value.replace(/[^\d\s+\-()]/g, '')
+      setFormData(prev => ({
+        ...prev,
+        [name]: phoneValue
+      }))
+      // Clear error if user is typing valid characters
+      if (phoneValue && phoneError) {
+        const digits = phoneValue.replace(/\D/g, '')
+        if (digits.length >= 10 && digits.length <= 15) {
+          setPhoneError('')
+        }
+      }
+      return
+    }
     
     // Handle message character count
     if (name === 'message') {
@@ -140,6 +173,7 @@ const BookModel = ({ isOpen, onClose }) => {
         setEmailError('');
       }
     }
+    
     if (name === 'date') {
       setFormData(prev => ({
         ...prev,
@@ -151,6 +185,13 @@ const BookModel = ({ isOpen, onClose }) => {
         ...prev,
         [name]: value
       }))
+    }
+  }
+
+  const handlePhoneBlur = () => {
+    // Validate phone when field loses focus
+    if (formData.phone) {
+      validatePhone(formData.phone)
     }
   }
 
@@ -298,9 +339,29 @@ const BookModel = ({ isOpen, onClose }) => {
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
-                  className={`w-full px-4 py-3 border ${emailError ? 'border-red-500' : 'border-gray-300'} rounded-lg`}
+                  placeholder="your.email@example.com"
+                  className={`w-full px-4 py-3 border ${
+                    emailError 
+                      ? 'border-red-500 focus:ring-red-500 focus:border-red-500' 
+                      : 'border-gray-300 focus:ring-2 focus:ring-[#641DC9] focus:border-[#641DC9]'
+                  } rounded-lg transition-colors`}
                 />
-                {emailError && <p className="text-red-500 text-sm">{emailError}</p>}
+                {emailError && (
+                  <p className="text-red-500 text-sm mt-1 flex items-center gap-1">
+                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+                    </svg>
+                    {emailError}
+                  </p>
+                )}
+                {!emailError && formData.email && (
+                  <p className="text-green-600 text-xs mt-1 flex items-center gap-1">
+                    <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                    </svg>
+                    Valid email address
+                  </p>
+                )}
               </div>
 
               <div>
@@ -310,9 +371,30 @@ const BookModel = ({ isOpen, onClose }) => {
                   name="phone"
                   value={formData.phone}
                   onChange={handleChange}
-                  className={`w-full px-4 py-3 border ${phoneError ? 'border-red-500' : 'border-gray-300'} rounded-lg`}
+                  onBlur={handlePhoneBlur}
+                  placeholder="+1 (555) 123-4567"
+                  className={`w-full px-4 py-3 border ${
+                    phoneError 
+                      ? 'border-red-500 focus:ring-red-500 focus:border-red-500' 
+                      : 'border-gray-300 focus:ring-2 focus:ring-[#641DC9] focus:border-[#641DC9]'
+                  } rounded-lg transition-colors`}
                 />
-                {phoneError && <p className="text-red-500 text-sm">{phoneError}</p>}
+                {phoneError && (
+                  <p className="text-red-500 text-sm mt-1 flex items-center gap-1">
+                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+                    </svg>
+                    {phoneError}
+                  </p>
+                )}
+                {!phoneError && formData.phone && (
+                  <p className="text-green-600 text-xs mt-1 flex items-center gap-1">
+                    <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                    </svg>
+                    Valid phone number
+                  </p>
+                )}
               </div>
             </div>
 

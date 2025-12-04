@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { publicBlogService } from '../services/publicBlogService';
 import { newsletterService } from '../services/newsletterService';
+import { getBlogSlug } from '../utils/slugUtils';
 import BookModel from './BookModel';
 import Footer from './Footer';
 import toast, { Toaster } from 'react-hot-toast';
@@ -33,7 +34,21 @@ const BlogDetail = () => {
     try {
       setLoading(true);
       setError('');
-      const result = await publicBlogService.getBlogBySlug(slug);
+      
+      // Try fetching by slug first
+      let result = await publicBlogService.getBlogBySlug(slug);
+      
+      // If not found and slug looks like it might be a generated slug from title,
+      // the backend should handle it via its fallback logic
+      // But if still not found, try to decode and search
+      if (!result.success && slug) {
+        // The backend has fallback logic to find by title, so this should work
+        // But let's also try URL decoding in case of encoding issues
+        const decodedSlug = decodeURIComponent(slug);
+        if (decodedSlug !== slug) {
+          result = await publicBlogService.getBlogBySlug(decodedSlug);
+        }
+      }
       
       if (result.success) {
         setBlog(result.data);
@@ -41,6 +56,7 @@ const BlogDetail = () => {
         setError(result.message || 'Blog post not found');
       }
     } catch (err) {
+      console.error('Error fetching blog:', err);
       setError('Failed to load blog post');
     } finally {
       setLoading(false);
@@ -331,7 +347,7 @@ const BlogDetail = () => {
               {relatedBlogs.map((relatedPost) => (
                 <Link
                   key={relatedPost.id}
-                  to={`/blog/${relatedPost.slug || relatedPost.id}`}
+                  to={`/blog/${getBlogSlug(relatedPost)}`}
                   className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300"
                 >
                   <div className="h-48 overflow-hidden">

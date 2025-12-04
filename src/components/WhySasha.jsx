@@ -1,11 +1,6 @@
 import React from 'react'
 import { motion } from 'framer-motion'
-import doctorLedExpertiseImg from '../../assets/Doctor-Led Expertise.png'
-import measurableResultsImg from '../../assets/Measurable Results.png'
-import luxuryExperienceImg from '../../assets/Luxury Experience.png'
-import evidenceBasedTreatmentsImg from '../../assets/Evidence-Based Treatments.png'
-import customDesignedPlansImg from '../../assets/Custom-Designed Plans.png'
-import ongoingSupportImg from '../../assets/Ongoing Support.png'
+
 
 const WhySasha = () => {
   const containerVariants = {

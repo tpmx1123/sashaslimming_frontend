@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import FaqImage from "../../assets/Frequently Asked.svg";
+
 
 const FAQ = () => {
   const [activeIndex, setActiveIndex] = useState(1); // Default to second item expanded
@@ -95,7 +95,7 @@ const FAQ = () => {
             style={{ flexShrink: 0 }}
           >
             <img
-              src={FaqImage}
+              src={'https://res.cloudinary.com/di4caiech/image/upload/v1764045875/faq_kpkxcw.png'}
               alt="Frequently Asked Questions"
               className="w-full max-w-md object-contain"
               style={{

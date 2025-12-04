@@ -1,4 +1,4 @@
-const API_BASE_URL = 'http://localhost:8081/api';
+import API_BASE_URL from '../config/apiConfig';
 
 export const newsletterService = {
   // Public endpoint - Subscribe to newsletter (no authentication required)

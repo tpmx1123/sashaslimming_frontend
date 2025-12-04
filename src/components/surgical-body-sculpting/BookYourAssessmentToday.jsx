@@ -79,18 +79,26 @@ const BookYourAssessmentToday = () => {
             <div className="flex-1 ml-0 sm:ml-4 md:ml-8 lg:ml-14 -mt-0 sm:-mt-2 md:-mt-3 pr-2 sm:pr-4 md:pr-0">
               
               
-              <motion.p 
-                className="text-[#61338A] mb-2 sm:mb-3 md:mb-4 lg:mb-4 text-[14px] sm:text-xl md:text-2xl lg:text-3xl xl:text-[35px] w-full sm:w-[250px] md:w-[350px] lg:w-[620px] font-poppins font-bold leading-tight sm:leading-snug md:leading-normal" 
-                style={{letterSpacing: '0.5px', lineHeight: '1.3'}}
-                variants={textVariants}
-              >
+            <motion.p
+  className="text-[#61338A] mb-2 sm:mb-3 md:mb-4 lg:mb-4 
+             text-[12px] sm:text-xl md:text-2xl lg:text-3xl xl:text-[35px] 
+             w-full sm:w-[250px] md:w-[350px] lg:w-[620px] 
+             font-poppins font-bold leading-tight sm:leading-snug md:leading-normal"
+  style={{ letterSpacing: '0.5px', lineHeight: '1.3' }}
+  variants={textVariants}
+>
+
                 Transform Your Body with Confidence
               </motion.p>
-              <motion.p 
-                className="text-[#61338A] mb-2 sm:mb-3 md:mb-4 lg:mb-4 text-[14px] sm:text-xl md:text-1xl lg:text-xl xl:text-1xl w-full sm:w-[250px] md:w-[350px] lg:w-[520px] font-poppins leading-tight sm:leading-snug md:leading-normal" 
-                style={{letterSpacing: '0.5px', lineHeight: '1.6'}}
-                variants={textVariants}
-              >
+              <motion.p
+  className="text-[#61338A] mb-2 sm:mb-3 md:mb-4 lg:mb-4 
+             text-[12px] sm:text-base md:text-xl lg:text-xl xl:text-xl 
+             w-[180px] sm:w-[250px] md:w-[350px] lg:w-[520px] 
+             font-poppins leading-tight sm:leading-snug md:leading-normal"
+  style={{ letterSpacing: '0.5px', lineHeight: '1.6' }}
+  variants={textVariants}
+>
+
                For those ready to make a bold change Sasha Luxe delivers expert care, artistry, and lasting results.
               </motion.p>
               <motion.button 
