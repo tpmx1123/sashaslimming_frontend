@@ -93,34 +93,90 @@ const BookModel = ({ isOpen, onClose }) => {
 
   const timeSlots = formData.date ? generateTimeSlots(formData.date) : []
 
+  // Helper function to check email validity without side effects (for display purposes)
+  const isEmailValid = (email) => {
+    if (!email || !email.trim()) return false
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
+    const trimmedEmail = email.trim()
+    if (trimmedEmail.startsWith('@') || trimmedEmail.endsWith('@')) return false
+    if (trimmedEmail.includes('..') || trimmedEmail.includes('@@')) return false
+    return emailRegex.test(trimmedEmail)
+  }
+
+  // Helper function to check phone validity without side effects (for display purposes)
+  const isPhoneValid = (phone) => {
+    if (!phone || !phone.trim()) return false
+    const trimmedPhone = phone.trim()
+    const phoneRegex = /^[\d\s+\-()]+$/
+    if (!phoneRegex.test(trimmedPhone)) return false
+    const digits = trimmedPhone.replace(/\D/g, '')
+    return digits.length >= 10 && digits.length <= 15
+  }
+
   const validateEmail = (email) => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-    if (!email) return setEmailError('Email is required'), false
-    if (!emailRegex.test(email)) return setEmailError('Enter a valid email'), false
+    // More strict email regex: requires proper domain structure
+    // Format: local@domain.tld (at least 2 characters after @, at least 2 characters for TLD)
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
+    
+    if (!email || !email.trim()) {
+      setEmailError('Email is required')
+      return false
+    }
+    
+    const trimmedEmail = email.trim()
+    
+    // Check for basic structure
+    if (!trimmedEmail.includes('@')) {
+      setEmailError('Email must contain @ symbol')
+      return false
+    }
+    
+    // Check for valid format
+    if (!emailRegex.test(trimmedEmail)) {
+      setEmailError('Please enter a valid email address')
+      return false
+    }
+    
+    // Additional checks
+    if (trimmedEmail.startsWith('@') || trimmedEmail.endsWith('@')) {
+      setEmailError('Please enter a valid email address')
+      return false
+    }
+    
+    if (trimmedEmail.includes('..') || trimmedEmail.includes('@@')) {
+      setEmailError('Please enter a valid email address')
+      return false
+    }
+    
     setEmailError('')
     return true
   }
 
   const validatePhone = (phone) => {
-    const cleaned = phone.replace(/[^\d+]/g, '')
-    const digits = cleaned.replace(/\D/g, '')
-
     if (!phone || !phone.trim()) {
       setPhoneError('Phone number is required')
       return false
     }
+    
+    const trimmedPhone = phone.trim()
+    
+    // Check if phone contains invalid characters (only digits, spaces, +, -, (, ) allowed)
+    const phoneRegex = /^[\d\s+\-()]+$/
+    if (!phoneRegex.test(trimmedPhone)) {
+      setPhoneError('Phone number can only contain digits and +, -, (, )')
+      return false
+    }
+    
+    // Extract only digits for length validation
+    const digits = trimmedPhone.replace(/\D/g, '')
+    
     if (digits.length < 10) {
       setPhoneError('Phone number must be at least 10 digits')
       return false
     }
+    
     if (digits.length > 15) {
       setPhoneError('Phone number cannot exceed 15 digits')
-      return false
-    }
-    // Check if phone contains invalid characters (only digits, spaces, +, -, (, ) allowed)
-    const phoneRegex = /^[\d\s+\-()]+$/
-    if (!phoneRegex.test(phone)) {
-      setPhoneError('Phone number can only contain digits and +, -, (, )')
       return false
     }
 
@@ -139,10 +195,12 @@ const BookModel = ({ isOpen, onClose }) => {
         ...prev,
         [name]: phoneValue
       }))
-      // Clear error if user is typing valid characters
+      // Only clear error if full validation passes (don't show valid prematurely)
       if (phoneValue && phoneError) {
+        // Run full validation to check if error should be cleared
         const digits = phoneValue.replace(/\D/g, '')
-        if (digits.length >= 10 && digits.length <= 15) {
+        const phoneRegex = /^[\d\s+\-()]+$/
+        if (phoneRegex.test(phoneValue) && digits.length >= 10 && digits.length <= 15) {
           setPhoneError('')
         }
       }
@@ -165,13 +223,16 @@ const BookModel = ({ isOpen, onClose }) => {
       setCharCount(words.length);
     }
     
-    // Validate email on change
+    // Handle email validation on change
     if (name === 'email') {
-      if (value && !validateEmail(value)) {
-        setEmailError('Please enter a valid email address');
-      } else {
-        setEmailError('');
+      // Only clear error if email is fully valid (prevents showing valid prematurely)
+      if (value && isEmailValid(value)) {
+        setEmailError('')
+      } else if (!value) {
+        // Clear error if field is empty (user deleted content)
+        setEmailError('')
       }
+      // Don't set error while typing - let blur handle validation errors
     }
     
     if (name === 'date') {
@@ -190,9 +251,12 @@ const BookModel = ({ isOpen, onClose }) => {
 
   const handlePhoneBlur = () => {
     // Validate phone when field loses focus
-    if (formData.phone) {
-      validatePhone(formData.phone)
-    }
+    validatePhone(formData.phone)
+  }
+
+  const handleEmailBlur = () => {
+    // Validate email when field loses focus
+    validateEmail(formData.email)
   }
 
   const handleSubmit = async (e) => {
@@ -339,6 +403,7 @@ const BookModel = ({ isOpen, onClose }) => {
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
+                  onBlur={handleEmailBlur}
                   placeholder="your.email@example.com"
                   className={`w-full px-4 py-3 border ${
                     emailError 
@@ -354,7 +419,7 @@ const BookModel = ({ isOpen, onClose }) => {
                     {emailError}
                   </p>
                 )}
-                {!emailError && formData.email && (
+                {!emailError && formData.email && isEmailValid(formData.email) && (
                   <p className="text-green-600 text-xs mt-1 flex items-center gap-1">
                     <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
@@ -387,7 +452,7 @@ const BookModel = ({ isOpen, onClose }) => {
                     {phoneError}
                   </p>
                 )}
-                {!phoneError && formData.phone && (
+                {!phoneError && formData.phone && isPhoneValid(formData.phone) && (
                   <p className="text-green-600 text-xs mt-1 flex items-center gap-1">
                     <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
