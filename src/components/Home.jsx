@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import BookModel from './BookModel';
+import SEO from './SEO';
 
 const mobileHeroImage = "https://res.cloudinary.com/di4caiech/image/upload/v1764235891/Mask_group_c5pd3w.png";
 
@@ -44,6 +45,11 @@ const Home = () => {
 
   return (
     <>
+      <SEO 
+        title="Sasha Slimming - Advanced Body Contouring & Fat Reduction Solutions"
+        description="Transform your body with Sasha Slimming's advanced non-surgical fat reduction, inch loss, skin tightening, and body sculpting treatments. Expert consultations available."
+        keywords="fat reduction, inch loss, body contouring, skin tightening, non-surgical slimming, body sculpting, fat removal, weight loss, body transformation, slimming clinic"
+      />
       {/* MOBILE VIEW */}
       <div className="lg:hidden w-full relative pt-12 overflow-x-hidden">
         <div className="relative w-full h-full">

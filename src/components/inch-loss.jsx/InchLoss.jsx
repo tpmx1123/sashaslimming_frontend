@@ -6,6 +6,7 @@ import WhoFor from './whoFor'
 import BeforeAfter from './beforeafter'
 import Faqsection from './faqsection'
 import { motion } from 'framer-motion'
+import SEO from '../SEO'
 const InchLoss = () => {
   const [isBookingModalOpen, setIsBookingModalOpen] = React.useState(false)
   
@@ -13,6 +14,12 @@ const InchLoss = () => {
 
   return (
     <div className="w-full min-h-screen relative overflow-hidden">
+      <SEO 
+        title="Inch Loss Treatment - Targeted Body Reduction | Sasha Slimming"
+        description="Effective inch loss treatments to reduce body measurements without surgery. Targeted reduction for waist, thighs, arms, and more. See visible results."
+        keywords="inch loss, body measurement reduction, waist reduction, thigh reduction, non-surgical inch loss, body slimming"
+        canonical="https://sashaslimming.com/inch-loss"
+      />
       {/* MOBILE VIEW */}
       <div className="lg:hidden w-full relative overflow-x-hidden pt-20">
         <div className="relative w-full h-full">

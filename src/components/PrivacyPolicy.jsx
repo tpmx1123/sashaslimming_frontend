@@ -1,10 +1,18 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import SEO from './SEO';
 
 const PrivacyPolicy = () => {
   return (
     <div className="min-h-screen bg-gray-50 pt-16">
+      <SEO 
+        title="Privacy Policy | Sasha Slimming"
+        description="Read Sasha Slimming's privacy policy to understand how we collect, use, and protect your personal information."
+        keywords="privacy policy, data protection, privacy terms"
+        canonical="https://sashaslimming.com/privacy-policy"
+        noindex={true}
+      />
       <div className="py-8 px-4 sm:px-6 lg:px-8">
         <motion.div 
           className="max-w-4xl mx-auto overflow-hidden mt-8"

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import toast, { Toaster } from 'react-hot-toast'
 import { contactService } from '../services/contactService'
+import SEO from './SEO'
 
 const bannerImage =
   'https://res.cloudinary.com/di4caiech/image/upload/v1764238157/contact_slim_nj7mks.jpg'
@@ -286,6 +287,13 @@ const ContactUs = () => {
     <motion.div
       className="w-full bg-gradient-to-br from-gray-50 via-white to-[#E8D5FF]/20 pt-24 min-h-screen"
       initial="hidden"
+    >
+      <SEO 
+        title="Contact Us - Book Your Consultation | Sasha Slimming"
+        description="Get in touch with Sasha Slimming for expert consultations on fat reduction, inch loss, skin tightening, and body sculpting treatments. Book your appointment today."
+        keywords="contact sasha slimming, book consultation, slimming clinic contact, appointment booking, body transformation consultation"
+        canonical="https://sashaslimming.com/contact-us"
+      />
       whileInView="visible"
       viewport={{ once: true, amount: 0.1 }}
       variants={containerVariants}

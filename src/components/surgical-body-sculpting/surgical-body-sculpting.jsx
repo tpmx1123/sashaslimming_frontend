@@ -6,6 +6,7 @@ import { motion } from 'framer-motion'
 import WhoExpect from './WhoExpect'
 import FaqSection from './faqsection'
 import BookYourAssessmentToday from './BookYourAssessmentToday'
+import SEO from '../SEO'
 
 const SurgicalBodySculpting = () => {
   const [isBookingModalOpen, setIsBookingModalOpen] = React.useState(false)
@@ -14,6 +15,12 @@ const SurgicalBodySculpting = () => {
 
   return (
     <div className="w-full min-h-screen relative overflow-hidden">
+      <SEO 
+        title="Surgical Body Sculpting - Advanced Body Contouring Surgery | Sasha Slimming"
+        description="Expert surgical body sculpting procedures for dramatic body transformation. Advanced techniques for fat removal, body reshaping, and contouring."
+        keywords="surgical body sculpting, body contouring surgery, liposuction, body reshaping, surgical fat removal, body transformation surgery"
+        canonical="https://sashaslimming.com/surgical-body-sculpting"
+      />
       {/* MOBILE VIEW */}
       <div className="lg:hidden w-full relative overflow-x-hidden pt-10">
         <div className="relative w-full h-full">

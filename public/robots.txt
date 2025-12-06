@@ -1,0 +1,31 @@
+# robots.txt for Sasha Slimming Website
+# https://sashaslimming.com/robots.txt
+
+User-agent: *
+Allow: /
+
+# Disallow admin and private areas
+Disallow: /admin-login
+Disallow: /admin-panel
+Disallow: /admin/
+
+# Allow all public pages
+Allow: /
+Allow: /advanced-slimming
+Allow: /skin-tightening
+Allow: /inch-loss
+Allow: /fat-reduction
+Allow: /surgical-body-sculpting
+Allow: /muscle-building-toning
+Allow: /contact-us
+Allow: /blog
+Allow: /blog/
+Allow: /privacy-policy
+Allow: /terms-conditions
+
+# Sitemap location
+Sitemap: https://sashaslimming.com/sitemap.xml
+
+# Crawl-delay (optional - helps prevent server overload)
+Crawl-delay: 1
+

@@ -1,10 +1,18 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import SEO from './SEO';
 
 const TermsAndConditions = () => {
   return (
     <div className="min-h-screen bg-gray-50 pt-16">
+      <SEO 
+        title="Terms & Conditions | Sasha Slimming"
+        description="Read Sasha Slimming's terms and conditions for using our services and website."
+        keywords="terms and conditions, terms of service, legal terms"
+        canonical="https://sashaslimming.com/terms-conditions"
+        noindex={true}
+      />
       <div className="py-8 px-4 sm:px-6 lg:px-8">
         <motion.div 
           className="max-w-4xl mx-auto overflow-hidden mt-8"

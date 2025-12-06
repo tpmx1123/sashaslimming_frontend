@@ -6,6 +6,7 @@ import BookModel from '../BookModel'
 import WhoExpect from './WhoExpect'
 import FAQFR from './FAQFR'
 import BookYourAssessmentToday from './BookYourAssessmentToday'
+import SEO from '../SEO'
 
 const FatReduction = () => {
   const [isBookingModalOpen, setIsBookingModalOpen] = React.useState(false)
@@ -14,6 +15,12 @@ const FatReduction = () => {
 
   return (
     <div className="w-full min-h-screen relative overflow-hidden">
+      <SEO 
+        title="Fat Reduction Treatment - Non-Surgical Body Contouring | Sasha Slimming"
+        description="Advanced non-surgical fat reduction treatments to eliminate stubborn fat cells. Safe, effective body contouring solutions for targeted fat removal without surgery."
+        keywords="fat reduction, non-surgical fat removal, body contouring, fat reduction treatment, eliminate fat cells, targeted fat loss, body sculpting"
+        canonical="https://sashaslimming.com/fat-reduction"
+      />
       {/* MOBILE VIEW */}
       <div className="lg:hidden w-full relative overflow-x-hidden pt-20">
         <div className="relative w-full h-full">

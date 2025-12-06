@@ -6,6 +6,7 @@ import { getBlogSlug } from '../utils/slugUtils';
 import BookModel from './BookModel';
 import Footer from './Footer';
 import toast, { Toaster } from 'react-hot-toast';
+import SEO from './SEO';
 
 const BlogDetail = () => {
   const { slug } = useParams();
@@ -189,7 +190,14 @@ const BlogDetail = () => {
 
   return (
     <div className="bg-gray-50 min-h-screen mt-20">
-      
+      <SEO 
+        title={blog ? `${blog.title} | Sasha Slimming Blog` : 'Blog Post | Sasha Slimming'}
+        description={blog ? (blog.excerpt || blog.content?.substring(0, 160) || 'Read our latest article on body transformation and slimming treatments.') : 'Blog post from Sasha Slimming'}
+        keywords={blog?.tags ? blog.tags : 'body transformation, slimming, fat reduction'}
+        image={blog?.image}
+        type="article"
+        canonical={`https://sashaslimming.com/blog/${slug}`}
+      />
       {/* Blog Content */}
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Back Button */}

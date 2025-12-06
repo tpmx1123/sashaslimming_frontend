@@ -11,6 +11,7 @@ import EndrocrinologistSection from './Endocrinologists'
 import FAQData from './faqData'
 import BookYourAssessmentToday from './BookYourAssessmentToday'
 import OurClient from './client'
+import SEO from '../SEO'
 const AdvancedSlimming = () => {
   const [isBookingModalOpen, setIsBookingModalOpen] = React.useState(false)
   
@@ -18,6 +19,12 @@ const AdvancedSlimming = () => {
 
   return (
     <div className="w-full min-h-screen relative overflow-hidden ">
+      <SEO 
+        title="Advanced Slimming Solutions - Comprehensive Body Transformation | Sasha Slimming"
+        description="Comprehensive advanced slimming solutions combining fat reduction, inch loss, skin tightening, and body sculpting. Expert consultations for personalized treatment plans."
+        keywords="advanced slimming, body transformation, comprehensive slimming, fat reduction, inch loss, skin tightening, body contouring"
+        canonical="https://sashaslimming.com/advanced-slimming"
+      />
       {/* MOBILE VIEW */}
       <div className="lg:hidden w-full relative overflow-x-hidden pt-20">
         <div className="relative w-full h-full">

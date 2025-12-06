@@ -7,6 +7,7 @@ import WhoFor from './whoFor'
 import ExpectBeforeAfter from './expectBeforAfter'
 import Faqsection from './faqsection'
 import LifeGlow from './lifeGlow'
+import SEO from '../SEO'
 
 const SkinTightening = () => {
   const [isBookingModalOpen, setIsBookingModalOpen] = React.useState(false)
@@ -15,6 +16,12 @@ const SkinTightening = () => {
 
   return (
     <div className="w-full min-h-screen relative overflow-hidden">
+      <SEO 
+        title="Skin Tightening Treatment - Non-Surgical Firming Solutions | Sasha Slimming"
+        description="Advanced skin tightening treatments to firm and lift loose skin. Non-surgical solutions for sagging skin on face, body, and neck. Restore youthful appearance."
+        keywords="skin tightening, firm skin, sagging skin treatment, non-surgical skin tightening, loose skin, skin firming, body contouring"
+        canonical="https://sashaslimming.com/skin-tightening"
+      />
       {/* MOBILE VIEW */}
       <div className="lg:hidden w-full relative overflow-x-hidden pt-20">
         <div className="relative w-full h-full">

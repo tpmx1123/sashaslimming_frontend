@@ -99,6 +99,12 @@ const Blog = () => {
 
   return (
     <div className="bg-gray-50 min-h-screen mt-20">
+      <SEO 
+        title="Blog - Body Transformation Tips & Success Stories | Sasha Slimming"
+        description="Expert advice, success stories, and the latest insights on body transformation, fat reduction, skin tightening, and advanced slimming treatments."
+        keywords="body transformation blog, slimming tips, fat reduction advice, skin tightening guide, body contouring articles, weight loss success stories"
+        canonical="https://sashaslimming.com/blog"
+      />
       {/* Hero Section */}
       <div className="relative bg-gradient-to-r from-sasha-purple-deeper to-sasha-purple-dark text-white py-20 md:py-28">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">

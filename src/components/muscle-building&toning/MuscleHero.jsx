@@ -6,6 +6,7 @@ import BookModel from '../BookModel'
 import WhoExpectMB from './WhoExpect'
 import FAQMB from './FAQMB'
 import BookYourAssessmentToday from './BookYourAssessmentToday'
+import SEO from '../SEO'
 //import Ready from './ready'
 
 const MuscleHero = () => {
@@ -15,6 +16,12 @@ const MuscleHero = () => {
 
   return (
     <div className="w-full min-h-screen relative overflow-hidden">
+      <SEO 
+        title="Muscle Building & Toning - Body Sculpting & Strength Training | Sasha Slimming"
+        description="Advanced muscle building and toning treatments for defined, sculpted physique. Non-surgical solutions for muscle enhancement and body definition."
+        keywords="muscle building, muscle toning, body sculpting, muscle definition, strength training, body toning, muscle enhancement"
+        canonical="https://sashaslimming.com/muscle-building-toning"
+      />
       {/* MOBILE VIEW */}
       <div className="lg:hidden w-full relative overflow-x-hidden pt-20">
         <div className="relative w-full h-full">
