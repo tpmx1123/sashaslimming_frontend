@@ -4,6 +4,7 @@ import { publicBlogService } from '../services/publicBlogService';
 import { newsletterService } from '../services/newsletterService';
 import { getBlogSlug } from '../utils/slugUtils';
 import toast, { Toaster } from 'react-hot-toast';
+import SEO from './SEO';
 
 const Blog = () => {
   const [activeCategory, setActiveCategory] = useState('All Articles');
