@@ -287,6 +287,9 @@ const ContactUs = () => {
     <motion.div
       className="w-full bg-gradient-to-br from-gray-50 via-white to-[#E8D5FF]/20 pt-24 min-h-screen"
       initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.1 }}
+      variants={containerVariants}
     >
       <SEO 
         title="Contact Us - Book Your Consultation | Sasha Slimming"
@@ -294,10 +297,6 @@ const ContactUs = () => {
         keywords="contact sasha slimming, book consultation, slimming clinic contact, appointment booking, body transformation consultation"
         canonical="https://sashaslimming.com/contact-us"
       />
-      whileInView="visible"
-      viewport={{ once: true, amount: 0.1 }}
-      variants={containerVariants}
-    >
       {/* Hero Section */}
       <motion.div
         className="w-full relative bg-no-repeat bg-cover bg-center overflow-hidden flex items-center justify-center h-[200px] md:h-[270px]"
